@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.canvas.Canvas?>
+
+<StackPane fx:controller="paint.controller.MainController" xmlns:fx="http://javafx.com/fxml">
+    <GridPane StackPane.alignment="TOP_LEFT">
+        <columnConstraints>
+            <ColumnConstraints percentWidth="100"/>
+        </columnConstraints>
+        <MenuBar fx:id="menuBar" GridPane.rowIndex="0" GridPane.columnIndex="0">
+            <menus>
+                <Menu text="File">
+                    <MenuItem text="Open" onAction="#handleOpen"/>
+                    <MenuItem text="Save" onAction="#handleSave"/>
+                    <MenuItem text="Save As" onAction="#handleSaveAs"/>
+                    <MenuItem text="Exit" onAction="#handleExit"/>
+                </Menu>
+                <Menu text="Edit">
+                    <items>
+                        <!--Content most likely soon to come-->
+                    </items>
+                </Menu>
+                <Menu text="Help">
+                    <MenuItem text="About" onAction="#handleAbout"/>
+                </Menu>
+            </menus>
+        </MenuBar>
+        <ColorPicker fx:id="colorPicker" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+    </GridPane>
+    <Canvas fx:id="canvas" StackPane.alignment="CENTER">
+
+    </Canvas>
+</StackPane>
