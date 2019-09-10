@@ -17,6 +17,10 @@ public class Main extends Application {
      * The initial height of the scene
      */
     public static final int HEIGHT = 600;
+    /**
+     * Enable this for println debugging (not many)
+     */
+    public static boolean DEBUG = false;
 
     public static void main(String[] args) {
         launch(args);

@@ -27,7 +27,10 @@
                 </Menu>
             </menus>
         </MenuBar>
-        <ColorPicker fx:id="colorPicker" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+        <HBox GridPane.rowIndex="1" GridPane.columnIndex="0">
+            <ColorPicker fx:id="colorPicker" onAction="#handleColorPicker"/>
+            <ToggleButton fx:id="toggleDrawLine"/>
+        </HBox>
     </GridPane>
     <Canvas fx:id="canvas" StackPane.alignment="CENTER">
 

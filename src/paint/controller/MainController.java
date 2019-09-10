@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.MenuBar;
+import javafx.scene.control.ToggleButton;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import paint.util.CanvasManager;
@@ -42,6 +43,10 @@ public class MainController implements Initializable {
      * The colorPicker used to choose the color to draw with
      */
     @FXML private ColorPicker colorPicker;
+    /**
+     * Toggle button to toggle drawing lines
+     */
+    @FXML private ToggleButton toggleDrawLine;
 
     /**
      * Runs when File -> Open is clicked
@@ -101,6 +106,14 @@ public class MainController implements Initializable {
         stage.setScene(scene);
         stage.setTitle("About");
         stage.show();
+    }
+
+    /**
+     * Runs when something happens to the color picker
+     */
+    @FXML
+    public void handleColorPicker() {
+        canvasManager.setSelectedColor(colorPicker.getValue());
     }
 
     @Override
