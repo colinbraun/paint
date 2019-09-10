@@ -9,6 +9,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import paint.Main;
 import paint.constant.DrawMode;
 import paint.shape.Drawable;
@@ -44,7 +45,7 @@ public class CanvasManager {
     /**
      * The currently selected color
      */
-    private Color selectedColor;
+    private Paint selectedColor;
 
     public CanvasManager(@NotNull Canvas canvas) {
         this.canvas = canvas;
@@ -96,9 +97,10 @@ public class CanvasManager {
      * Set the color to draw with
      * @param color the color to draw with
      */
-    public void setSelectedColor(Color color) {
+    public void setSelectedColor(Paint color) {
         this.selectedColor = color;
         context.setFill(color);
+        context.setStroke(color);
     }
 
     /**

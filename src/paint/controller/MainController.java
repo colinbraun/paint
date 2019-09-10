@@ -9,6 +9,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import paint.util.CanvasManager;
@@ -65,6 +66,10 @@ public class MainController implements Initializable {
      */
     @FXML
     public void handleSave() {
+        if(openedFile == null) {
+            handleSaveAs();
+            return;
+        }
         canvasManager.saveCanvasToFile(openedFile);
     }
 
@@ -118,6 +123,7 @@ public class MainController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        colorPicker.setValue(Color.BLACK);
         fileChooser = new FileChooser();
         // TODO: implement this for more file types and without hardcoded values
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PNG Files (*.png)", "*.png"));
