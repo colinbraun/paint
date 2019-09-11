@@ -4,35 +4,39 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.canvas.Canvas?>
 
-<StackPane fx:controller="paint.controller.MainController" xmlns:fx="http://javafx.com/fxml">
-    <GridPane StackPane.alignment="TOP_LEFT">
-        <columnConstraints>
-            <ColumnConstraints percentWidth="100"/>
-        </columnConstraints>
-        <MenuBar fx:id="menuBar" GridPane.rowIndex="0" GridPane.columnIndex="0">
-            <menus>
-                <Menu text="File">
-                    <MenuItem text="Open" onAction="#handleOpen"/>
-                    <MenuItem text="Save" onAction="#handleSave"/>
-                    <MenuItem text="Save As" onAction="#handleSaveAs"/>
-                    <MenuItem text="Exit" onAction="#handleExit"/>
-                </Menu>
-                <Menu text="Edit">
-                    <items>
-                        <!--Content most likely soon to come-->
-                    </items>
-                </Menu>
-                <Menu text="Help">
-                    <MenuItem text="About" onAction="#handleAbout"/>
-                </Menu>
-            </menus>
-        </MenuBar>
-        <HBox GridPane.rowIndex="1" GridPane.columnIndex="0">
-            <ColorPicker fx:id="colorPicker" onAction="#handleColorPicker"/>
-            <ToggleButton fx:id="toggleDrawLine"/>
-        </HBox>
-    </GridPane>
-    <Canvas fx:id="canvas" StackPane.alignment="CENTER">
+<BorderPane fx:controller="paint.controller.MainController" xmlns:fx="http://javafx.com/fxml">
+    <top>
+        <GridPane>
+            <columnConstraints>
+                <ColumnConstraints percentWidth="100"/>
+            </columnConstraints>
+            <MenuBar fx:id="menuBar" GridPane.rowIndex="0" GridPane.columnIndex="0">
+                <menus>
+                    <Menu text="File">
+                        <MenuItem text="Open" onAction="#handleOpen"/>
+                        <MenuItem text="Save" onAction="#handleSave"/>
+                        <MenuItem text="Save As" onAction="#handleSaveAs"/>
+                        <MenuItem text="Exit" onAction="#handleExit"/>
+                    </Menu>
+                    <Menu text="Edit">
+                        <items>
+                            <!--Content most likely soon to come-->
+                        </items>
+                    </Menu>
+                    <Menu text="Help">
+                        <MenuItem text="About" onAction="#handleAbout"/>
+                    </Menu>
+                </menus>
+            </MenuBar>
+            <HBox GridPane.rowIndex="1" GridPane.columnIndex="0">
+                <ColorPicker fx:id="colorPicker" onAction="#handleColorPicker"/>
+                <ToggleButton fx:id="toggleDrawLine"/>
+            </HBox>
+        </GridPane>
+    </top>
+    <center>
+        <Canvas fx:id="canvas">
 
-    </Canvas>
-</StackPane>
+        </Canvas>
+    </center>
+</BorderPane>

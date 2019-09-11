@@ -1,12 +1,11 @@
 package paint.shape;
 
-import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 
 /**
  * A class to represent a line
  */
-public class Line extends Drawable {
+public class Line implements Drawable {
     private double startX;
     private double startY;
     private double endX;

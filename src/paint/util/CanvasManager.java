@@ -56,7 +56,7 @@ public class CanvasManager {
     }
 
     /**
-     * Initialize how all the events for the canvas are handled
+     * Initialize how all the events for the canvas are handled. For internal use.
      */
     private void initEvents() {
         if(Main.DEBUG)
