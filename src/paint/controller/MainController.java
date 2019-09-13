@@ -8,10 +8,12 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.MenuBar;
+import javafx.scene.control.Slider;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import paint.constant.DrawMode;
 import paint.util.CanvasManager;
 import java.io.File;
 import java.io.IOException;
@@ -50,6 +52,11 @@ public class MainController implements Initializable {
     @FXML private ToggleButton toggleDrawLine;
 
     /**
+     * Slider that controls the width of drawn lines/shapes
+     */
+    @FXML private Slider lineWidthSlider;
+
+    /**
      * Runs when File -> Open is clicked
      */
     @FXML
@@ -82,6 +89,7 @@ public class MainController implements Initializable {
         if(file == null)
             return;
         canvasManager.saveCanvasToFile(file);
+        openedFile = file;
     }
 
     /**
@@ -119,6 +127,25 @@ public class MainController implements Initializable {
     @FXML
     public void handleColorPicker() {
         canvasManager.setSelectedColor(colorPicker.getValue());
+    }
+
+    /**
+     * Runs when the line ToggleButton is clicked
+     */
+    @FXML
+    public void handleToggleDrawLine() {
+        if(toggleDrawLine.isSelected())
+            canvasManager.setDrawMode(DrawMode.LINE);
+        else
+            canvasManager.setDrawMode(null);
+    }
+
+    /**
+     * Runs when something happens with the slider
+     */
+    @FXML
+    public void handleSliderAction() {
+        canvasManager.setLineWidth(lineWidthSlider.getValue());
     }
 
     @Override

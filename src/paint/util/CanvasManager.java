@@ -51,7 +51,6 @@ public class CanvasManager {
         this.canvas = canvas;
         selectedColor = Color.BLACK;
         context = canvas.getGraphicsContext2D();
-        drawMode = DrawMode.LINE;
         initEvents();
     }
 
@@ -94,6 +93,13 @@ public class CanvasManager {
     }
 
     /**
+     * Set the width of the line being drawn
+     * @param width the chosen line width
+     */
+    public void setLineWidth(double width) {
+        context.setLineWidth(width);
+    }
+    /**
      * Set the color to draw with
      * @param color the color to draw with
      */
@@ -111,14 +117,15 @@ public class CanvasManager {
         Image image = null;
         try {
             // TODO: Do this better. Not great to use the initial window size to determine the image's size. Try to make more dynamic.
-            image = new Image(new FileInputStream(imageFile.getAbsolutePath()), Main.WIDTH * 0.8, Main.HEIGHT * 0.8, true, true);
+            //image = new Image(new FileInputStream(imageFile.getAbsolutePath()), Main.WIDTH * 0.8, Main.HEIGHT * 0.8, true, true);
+            image = new Image(new FileInputStream(imageFile.getAbsolutePath()));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             return;
         }
         canvas.setHeight(image.getHeight());
         canvas.setWidth(image.getWidth());
-        canvas.getGraphicsContext2D().drawImage(image, 0, 0, image.getWidth(), image.getHeight());
+        context.drawImage(image, 0, 0, image.getWidth(), image.getHeight());
     }
 
     /**

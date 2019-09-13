@@ -57,8 +57,6 @@ public class Line implements Drawable {
 
     @Override
     public void draw(GraphicsContext context) {
-        // TODO: Make this dependent on a UI element
-        context.setLineWidth(1.0);
         context.strokeLine(startX, startY, endX, endY);
     }
 }

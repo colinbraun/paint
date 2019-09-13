@@ -18,6 +18,14 @@ public class Main extends Application {
      */
     public static final int HEIGHT = 600;
     /**
+     * The minimum width of the stage
+     */
+    public static final int MIN_WIDTH = 200;
+    /**
+     * The minimum height of the stage
+     */
+    public static final int MIN_HEIGHT = 200;
+    /**
      * Enable this for println debugging (not many)
      */
     public static boolean DEBUG = false;
@@ -33,6 +41,8 @@ public class Main extends Application {
         Scene scene = new Scene(root, WIDTH, HEIGHT);
         stage.setTitle("Paint - CS250");
         stage.setScene(scene);
+        stage.setMinWidth(MIN_WIDTH);
+        stage.setMinHeight(MIN_HEIGHT);
         stage.show();
     }
 }
