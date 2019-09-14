@@ -19,7 +19,7 @@
                     <MenuItem text="Exit" onAction="#handleExit"/>
                 </Menu>
                 <Menu text="Edit">
-                    <!--Content most likely soon to come-->
+                    <MenuItem text="Resize" onAction="#handleResize"/>
                 </Menu>
                 <Menu text="Help">
                     <MenuItem text="About" onAction="#handleAbout"/>

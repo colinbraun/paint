@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import paint.controller.MainController;
 
 public class Main extends Application {
 
@@ -24,6 +25,10 @@ public class Main extends Application {
      * The minimum height of the stage
      */
     public static final int MIN_HEIGHT = 200;
+    /**
+     * A reference to the main controller currently in use.
+     */
+    public static MainController mainController;
 
     public static void main(String[] args) {
         launch(args);

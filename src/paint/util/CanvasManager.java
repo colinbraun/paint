@@ -132,6 +132,14 @@ public class CanvasManager {
     }
 
     /**
+     * Get the canvas that this CanvasManager is managing
+     * @return the canvas
+     */
+    public Canvas getCanvas() {
+        return canvas;
+    }
+
+    /**
      * Load an image onto the canvas from a file
      * @param imageFile The file to be loaded
      */

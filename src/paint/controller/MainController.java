@@ -12,6 +12,7 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import paint.Main;
 import paint.constant.DrawMode;
 import paint.util.CanvasManager;
 import java.io.File;
@@ -54,6 +55,14 @@ public class MainController extends BaseController {
      * Slider that controls the width of drawn lines/shapes
      */
     @FXML private Slider lineWidthSlider;
+
+    public MainController() {
+        Main.mainController = this;
+    }
+
+    public CanvasManager getCanvasManager() {
+        return canvasManager;
+    }
 
     /**
      * Runs when File -> Open is clicked
@@ -155,7 +164,8 @@ public class MainController extends BaseController {
         }
         Scene scene = new Scene(root);
         stage.setScene(scene);
-        stage.setTitle("About");
+        stage.setTitle("Resize Canvas");
+        stage.setResizable(false);
         stage.show();
     }
 
