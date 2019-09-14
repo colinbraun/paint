@@ -30,7 +30,7 @@
                 <ToggleButton fx:id="toggleDrawLine" text="Line" onAction="#handleToggleDrawLine"/>
                 <VBox alignment="CENTER">
                     <!--TODO: Consider other event options -->
-                    <Slider fx:id="lineWidthSlider" showTickLabels="true" showTickMarks="true" majorTickUnit="2" minorTickCount="1" value="1" min="0" max="10" prefWidth="300" onMouseMoved="#handleSliderAction"/>
+                    <Slider fx:id="lineWidthSlider" showTickLabels="true" showTickMarks="true" majorTickUnit="2" minorTickCount="1" value="1" min="0" max="10" prefWidth="300"/>
                     <Text>Line Width</Text>
                 </VBox>
             </HBox>

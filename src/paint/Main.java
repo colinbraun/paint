@@ -4,7 +4,6 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -25,10 +24,6 @@ public class Main extends Application {
      * The minimum height of the stage
      */
     public static final int MIN_HEIGHT = 200;
-    /**
-     * Enable this for println debugging (not many)
-     */
-    public static boolean DEBUG = false;
 
     public static void main(String[] args) {
         launch(args);

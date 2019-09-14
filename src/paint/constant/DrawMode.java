@@ -1,8 +1,13 @@
 package paint.constant;
 
 /**
- * Class to determine what mode we are currently in
+ * Enum to hold mode constants
  */
 public enum DrawMode {
-    LINE();
+    LINE(),
+    ELLIPSE(),
+    CIRCLE(),
+    RECTANGLE(),
+    SQUARE(),
+    PENCIL()
 }

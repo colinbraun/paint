@@ -2,7 +2,6 @@ package paint.controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -20,7 +19,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class MainController implements Initializable {
+public class MainController extends BaseController {
 
     /**
      * The canvas that will have the image on it
@@ -141,15 +140,29 @@ public class MainController implements Initializable {
     }
 
     /**
-     * Runs when something happens with the slider
+     * Runs when Edit -> Resize is clicked
+     * Note that all the button handling in the resize window happens in ResizeController
      */
     @FXML
-    public void handleSliderAction() {
-        canvasManager.setLineWidth(lineWidthSlider.getValue());
+    public void handleResize() {
+        Stage stage = new Stage();
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(getClass().getResource("/paint/fxml/resize.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+            return;
+        }
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.setTitle("About");
+        stage.show();
     }
 
+    // This will run AFTER all the component fields have been initialized, unlike the constructor
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        lineWidthSlider.valueProperty().addListener((event) -> canvasManager.setLineWidth(lineWidthSlider.getValue()));
         colorPicker.setValue(Color.BLACK);
         fileChooser = new FileChooser();
         // TODO: implement this for more file types and without hardcoded values

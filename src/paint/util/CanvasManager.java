@@ -10,7 +10,6 @@ import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
-import paint.Main;
 import paint.constant.DrawMode;
 import paint.shape.Drawable;
 import paint.shape.Line;
@@ -46,6 +45,10 @@ public class CanvasManager {
      * The currently selected color
      */
     private Paint selectedColor;
+    /**
+     * Used to facilitate previewing effects before they actually apply to the image.
+     */
+    private WritableImage redrawImage;
 
     public CanvasManager(@NotNull Canvas canvas) {
         this.canvas = canvas;
@@ -58,14 +61,12 @@ public class CanvasManager {
      * Initialize how all the events for the canvas are handled. For internal use.
      */
     private void initEvents() {
-        if(Main.DEBUG)
-            canvas.addEventHandler(MouseEvent.MOUSE_MOVED, event -> {
-                System.out.println("X: " + event.getX() + " Y: " + event.getY());
-            });
-
+        // Handle mouse pressed event
         canvas.addEventHandler(MouseEvent.MOUSE_PRESSED, (event) -> {
             if(drawMode == null)
                 return;
+
+            redrawImage = canvas.snapshot(new SnapshotParameters(), null);
             switch(drawMode) {
                 case LINE:
                     currentDrawing = new Line(event.getX(), event.getY());
@@ -73,6 +74,20 @@ public class CanvasManager {
             }
         });
 
+        //Handle mouse dragged event (button held down and moved)
+        canvas.addEventHandler(MouseEvent.MOUSE_DRAGGED, event -> {
+            if(drawMode == null)
+                return;
+            switch(drawMode) {
+                case LINE:
+                    redraw();
+                    ((Line)currentDrawing).setEnd(event.getX(), event.getY()).draw(context);
+                    // Do line preview things
+                    break;
+            }
+        });
+
+        //Handle mouse released event
         canvas.addEventHandler(MouseEvent.MOUSE_RELEASED, event -> {
             if(drawMode == null)
                 return;
@@ -110,6 +125,13 @@ public class CanvasManager {
     }
 
     /**
+     * Redraw the canvas based on what's stored in the redrawImage field. Internal use only
+     */
+    private void redraw() {
+        context.drawImage(redrawImage, 0, 0, redrawImage.getWidth(), redrawImage.getHeight());
+    }
+
+    /**
      * Load an image onto the canvas from a file
      * @param imageFile The file to be loaded
      */
@@ -117,7 +139,6 @@ public class CanvasManager {
         Image image = null;
         try {
             // TODO: Do this better. Not great to use the initial window size to determine the image's size. Try to make more dynamic.
-            //image = new Image(new FileInputStream(imageFile.getAbsolutePath()), Main.WIDTH * 0.8, Main.HEIGHT * 0.8, true, true);
             image = new Image(new FileInputStream(imageFile.getAbsolutePath()));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
