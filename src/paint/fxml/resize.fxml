@@ -10,8 +10,17 @@
 <BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="paint.controller.ResizeController" prefHeight="400.0" prefWidth="250.0">
     <center>
         <VBox>
-            <TextField fx:id="horizontalField"/>
-            <TextField fx:id="verticalField"/>
+            <HBox alignment="CENTER">
+                <Label text="Horizontal: "/>
+                <TextField fx:id="horizontalField"/>
+            </HBox>
+            <HBox alignment="CENTER">
+                <Label text="Vertical:     "/>
+                <TextField fx:id="verticalField"/>
+            </HBox>
+            <HBox alignment="CENTER">
+                <Button text="Resize" onAction="#handleResizeButton"/>
+            </HBox>
         </VBox>
     </center>
 </BorderPane>

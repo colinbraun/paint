@@ -152,6 +152,14 @@ public class CanvasManager {
             e.printStackTrace();
             return;
         }
+       loadImage(image);
+    }
+
+    /**
+     * Load an image onto the canvas from an Image object
+     * @param image the image to load onto the canvas
+     */
+    public void loadImage(Image image) {
         canvas.setHeight(image.getHeight());
         canvas.setWidth(image.getWidth());
         context.drawImage(image, 0, 0, image.getWidth(), image.getHeight());
