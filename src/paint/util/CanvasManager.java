@@ -2,6 +2,9 @@ package paint.util;
 
 import com.sun.istack.internal.NotNull;
 import javafx.embed.swing.SwingFXUtils;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -10,6 +13,7 @@ import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
+import javafx.stage.Stage;
 import paint.constant.DrawMode;
 import paint.shape.Drawable;
 import paint.shape.Line;
@@ -49,6 +53,10 @@ public class CanvasManager {
      * Used to facilitate previewing effects before they actually apply to the image.
      */
     private WritableImage redrawImage;
+    /**
+     * True if a change has been made that hasn't saved.
+     */
+    private boolean changeMadeNotSaved;
 
     public CanvasManager(@NotNull Canvas canvas) {
         this.canvas = canvas;
@@ -72,6 +80,7 @@ public class CanvasManager {
                     currentDrawing = new Line(event.getX(), event.getY());
                     break;
             }
+            changeMadeNotSaved = true;
         });
 
         //Handle mouse dragged event (button held down and moved)
@@ -85,6 +94,7 @@ public class CanvasManager {
                     // Do line preview things
                     break;
             }
+            changeMadeNotSaved = true;
         });
 
         //Handle mouse released event
@@ -96,6 +106,7 @@ public class CanvasManager {
                     ((Line)currentDrawing).setEnd(event.getX(), event.getY()).draw(context);
                     break;
             }
+            changeMadeNotSaved = true;
         });
     }
 
@@ -160,6 +171,8 @@ public class CanvasManager {
      * @param image the image to load onto the canvas
      */
     public void loadImage(Image image) {
+        if(changeMadeNotSaved)
+            showSavePopup();
         canvas.setHeight(image.getHeight());
         canvas.setWidth(image.getWidth());
         context.drawImage(image, 0, 0, image.getWidth(), image.getHeight());
@@ -177,5 +190,28 @@ public class CanvasManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        changeMadeNotSaved = false;
+    }
+
+    public boolean isChangeMadeNotSaved() {
+        return changeMadeNotSaved;
+    }
+
+    /**
+     * Internal method for displaying the popup asking if the user wants to save their changes
+     */
+    public void showSavePopup() {
+        Stage stage = new Stage();
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(getClass().getResource("/paint/fxml/save_popup.fxml"));
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.setTitle("");
+        stage.setResizable(false);
+        stage.show();
     }
 }

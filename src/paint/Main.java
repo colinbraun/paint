@@ -43,6 +43,12 @@ public class Main extends Application {
         stage.setScene(scene);
         stage.setMinWidth(MIN_WIDTH);
         stage.setMinHeight(MIN_HEIGHT);
+        stage.setOnCloseRequest((event) -> {
+            if(mainController.getCanvasManager().isChangeMadeNotSaved()) {
+                mainController.getCanvasManager().showSavePopup();
+                event.consume();
+            }
+        });
         stage.show();
     }
 }

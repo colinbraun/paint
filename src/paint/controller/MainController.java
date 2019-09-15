@@ -12,6 +12,7 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import paint.Main;
 import paint.constant.DrawMode;
 import paint.util.CanvasManager;
@@ -105,9 +106,8 @@ public class MainController extends BaseController {
      */
     @FXML
     public void handleExit() {
-        // TODO: Reassess if this is the best way to close the window
         Stage stage = (Stage)canvas.getScene().getWindow();
-        stage.close();
+        stage.fireEvent(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST));
     }
 
     /**
