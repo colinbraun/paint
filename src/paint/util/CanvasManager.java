@@ -25,6 +25,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Stack;
 
 /**
  * A utility class intended to make working with the canvas easier
@@ -53,7 +54,7 @@ public class CanvasManager {
     /**
      * Used to facilitate previewing effects before they actually apply to the image.
      */
-    private WritableImage redrawImage;
+    private Image redrawImage;
     /**
      * The file that is loaded onto the canvas, if any
      */
@@ -62,12 +63,23 @@ public class CanvasManager {
      * True if a change has been made that hasn't saved.
      */
     private boolean changeMadeNotSaved;
+    /**
+     * A stack containing images to load when an undo is requested
+     */
+    private Stack<Image> undoStack;
+    /**
+     * A stack containing images to load when a redo is request
+     */
+    private Stack<Image> redoStack;
 
     public CanvasManager(@NotNull Canvas canvas) {
+        undoStack = new Stack<>();
+        redoStack = new Stack<>();
         this.canvas = canvas;
         selectedColor = Color.BLACK;
         context = canvas.getGraphicsContext2D();
         initEvents();
+        undoStack.push(canvas.snapshot(null, null));
     }
 
     /**
@@ -138,6 +150,28 @@ public class CanvasManager {
         this.selectedColor = color;
         context.setFill(color);
         context.setStroke(color);
+    }
+
+    /**
+     * Undo the last change to the canvas
+     */
+    public void undo() {
+        if(undoStack.isEmpty())
+            return;
+        redoStack.push(redrawImage);
+        redrawImage = undoStack.pop();
+        redraw();
+    }
+
+    /**
+     * Redo the last undo
+     */
+    public void redo() {
+        if(redoStack.isEmpty())
+            return;
+        undoStack.push(redrawImage);
+        redrawImage = redoStack.pop();
+        redraw();
     }
 
     /**

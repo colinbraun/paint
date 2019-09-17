@@ -163,6 +163,22 @@ public class MainController extends BaseController {
         stage.show();
     }
 
+    /**
+     * Runs when Edit -> Undo is clicked
+     */
+    @FXML
+    public void handleUndo() {
+        canvasManager.undo();
+    }
+
+    /**
+     * Runs when Edit -> Redo is clicked
+     */
+    @FXML
+    public void handleRedo() {
+        canvasManager.redo();
+    }
+
     // This will run AFTER all the component fields have been initialized, unlike the constructor
     @Override
     public void initialize(URL location, ResourceBundle resources) {

@@ -19,6 +19,8 @@
                     <MenuItem text="Exit" onAction="#handleExit" accelerator="Shortcut+Q"/>
                 </Menu>
                 <Menu text="Edit">
+                    <MenuItem text="Undo" onAction="#handleUndo" accelerator="Shortcut+Z"/>
+                    <MenuItem text="Redo" onAction="#handleRedo" accelerator="Shortcut+Y"/>
                     <MenuItem text="Resize" onAction="#handleResize" accelerator="Shortcut+R"/>
                 </Menu>
                 <Menu text="Help">
