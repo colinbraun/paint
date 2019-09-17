@@ -164,6 +164,14 @@ public class CanvasManager {
     }
 
     /**
+     * Get whether or not a change has been made and a save is required
+     * @return whether ot not changes has been saved
+     */
+    public boolean isChangeMadeNotSaved() {
+        return changeMadeNotSaved;
+    }
+
+    /**
      * Load an image onto the canvas from a file
      * @param imageFile The file to be loaded
      */
@@ -210,10 +218,6 @@ public class CanvasManager {
         changeMadeNotSaved = false;
     }
 
-    public boolean isChangeMadeNotSaved() {
-        return changeMadeNotSaved;
-    }
-
     /**
      * Display the save window and wait.
      * Note that when YES is selected, SAVING IS HANDLED BY THE SAVE POPUP CONTROLLER
@@ -236,6 +240,7 @@ public class CanvasManager {
         stage.setResizable(false);
         controller.setStage(stage);
         stage.showAndWait();
+        context.beginPath();
         return controller.getChoice();
     }
 }
