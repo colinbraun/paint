@@ -6,9 +6,18 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="paint.controller.SavePopupController"
-            prefHeight="200.0" prefWidth="600.0">
-
+<?import javafx.scene.text.Text?>
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="paint.controller.SavePopupController" prefHeight="200.0" prefWidth="600.0">
+    <center>
+        <VBox alignment="CENTER">
+            <HBox alignment="CENTER">
+                <Text>Save file?</Text>
+            </HBox>
+            <HBox alignment="CENTER">
+                <Button onAction="#handleYes">Yes</Button>
+                <Button onAction="#handleNo">No</Button>
+                <Button onAction="#handleCancel">Cancel</Button>
+            </HBox>
+        </VBox>
+    </center>
 </BorderPane>

@@ -32,10 +32,6 @@ public class MainController extends BaseController {
      */
     @FXML private MenuBar menuBar;
     /**
-     * The currently open file
-     */
-    private File openedFile;
-    /**
      * A manager that handles canvas operations
      */
     private CanvasManager canvasManager;
@@ -73,8 +69,7 @@ public class MainController extends BaseController {
         File chosenFile = fileChooser.showOpenDialog(null);
         if(chosenFile == null)
             return;
-        openedFile = chosenFile;
-        canvasManager.loadImageFromFile(openedFile);
+        canvasManager.loadImageFromFile(chosenFile);
     }
 
     /**
@@ -82,11 +77,11 @@ public class MainController extends BaseController {
      */
     @FXML
     public void handleSave() {
-        if(openedFile == null) {
+        if(canvasManager.getOpenedFile() == null) {
             handleSaveAs();
             return;
         }
-        canvasManager.saveCanvasToFile(openedFile);
+        canvasManager.saveCanvasToFile(canvasManager.getOpenedFile());
     }
 
     /**
@@ -98,7 +93,6 @@ public class MainController extends BaseController {
         if(file == null)
             return;
         canvasManager.saveCanvasToFile(file);
-        openedFile = file;
     }
 
     /**
@@ -150,13 +144,13 @@ public class MainController extends BaseController {
 
     /**
      * Runs when Edit -> Resize is clicked
-     * Note that all the button handling in the resize window happens in ResizeController
+     * Note that all the button handling in the resize window happens in {@link ResizeController}
      */
     @FXML
     public void handleResize() {
         Stage stage = new Stage();
         Parent root = null;
-        try {
+            try {
             root = FXMLLoader.load(getClass().getResource("/paint/fxml/resize.fxml"));
         } catch (IOException e) {
             e.printStackTrace();

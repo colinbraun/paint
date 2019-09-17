@@ -23,8 +23,6 @@ public class ResizeController extends BaseController {
      */
     @FXML TextField verticalField;
 
-    private CanvasManager canvasManager;
-
     /**
      * Runs when the resize button is clicked
      */
@@ -62,7 +60,7 @@ public class ResizeController extends BaseController {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        canvasManager = Main.mainController.getCanvasManager();
+        super.initialize(location, resources);
         horizontalField.textProperty().setValue("" + (int)canvasManager.getCanvas().getWidth());
         verticalField.textProperty().setValue("" + (int)canvasManager.getCanvas().getHeight());
 

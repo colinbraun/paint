@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import paint.constant.SaveChoice;
 import paint.controller.MainController;
 
 public class Main extends Application {
@@ -43,10 +44,12 @@ public class Main extends Application {
         stage.setScene(scene);
         stage.setMinWidth(MIN_WIDTH);
         stage.setMinHeight(MIN_HEIGHT);
+        // Note: This is NOT triggered by stage.close().
+        // To trigger this event manually, use Stage#fireEvent()
         stage.setOnCloseRequest((event) -> {
             if(mainController.getCanvasManager().isChangeMadeNotSaved()) {
-                mainController.getCanvasManager().showSavePopup();
-                event.consume();
+                if(mainController.getCanvasManager().showSavePopup() == SaveChoice.CANCEL)
+                    event.consume();
             }
         });
         stage.show();

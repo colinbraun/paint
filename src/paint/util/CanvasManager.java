@@ -5,7 +5,6 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -15,6 +14,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import paint.constant.DrawMode;
+import paint.constant.SaveChoice;
+import paint.controller.SavePopupController;
 import paint.shape.Drawable;
 import paint.shape.Line;
 
@@ -54,6 +55,10 @@ public class CanvasManager {
      */
     private WritableImage redrawImage;
     /**
+     * The file that is loaded onto the canvas, if any
+     */
+    private File openedFile;
+    /**
      * True if a change has been made that hasn't saved.
      */
     private boolean changeMadeNotSaved;
@@ -74,7 +79,7 @@ public class CanvasManager {
             if(drawMode == null)
                 return;
 
-            redrawImage = canvas.snapshot(new SnapshotParameters(), null);
+            redrawImage = canvas.snapshot(null, null);
             switch(drawMode) {
                 case LINE:
                     currentDrawing = new Line(event.getX(), event.getY());
@@ -151,10 +156,23 @@ public class CanvasManager {
     }
 
     /**
+     * Get the currently opened file
+     * @return the currently opened file
+     */
+    public File getOpenedFile() {
+        return openedFile;
+    }
+
+    /**
      * Load an image onto the canvas from a file
      * @param imageFile The file to be loaded
      */
     public void loadImageFromFile(@NotNull File imageFile) {
+        if(changeMadeNotSaved) {
+            if(showSavePopup() == SaveChoice.CANCEL)
+                return;
+            changeMadeNotSaved = false;
+        }
         Image image = null;
         try {
             // TODO: Do this better. Not great to use the initial window size to determine the image's size. Try to make more dynamic.
@@ -163,7 +181,8 @@ public class CanvasManager {
             e.printStackTrace();
             return;
         }
-       loadImage(image);
+        openedFile = imageFile;
+        loadImage(image);
     }
 
     /**
@@ -171,8 +190,6 @@ public class CanvasManager {
      * @param image the image to load onto the canvas
      */
     public void loadImage(Image image) {
-        if(changeMadeNotSaved)
-            showSavePopup();
         canvas.setHeight(image.getHeight());
         canvas.setWidth(image.getWidth());
         context.drawImage(image, 0, 0, image.getWidth(), image.getHeight());
@@ -183,7 +200,7 @@ public class CanvasManager {
      * @param file The file to be saved to
      */
     public void saveCanvasToFile(@NotNull File file) {
-        WritableImage image = canvas.snapshot(new SnapshotParameters(), null);
+        WritableImage image = canvas.snapshot(null, null);
         BufferedImage bufferedImage = SwingFXUtils.fromFXImage(image, null);
         try {
             ImageIO.write(bufferedImage, "png", file);
@@ -198,20 +215,27 @@ public class CanvasManager {
     }
 
     /**
-     * Internal method for displaying the popup asking if the user wants to save their changes
+     * Display the save window and wait.
+     * Note that when YES is selected, SAVING IS HANDLED BY THE SAVE POPUP CONTROLLER
+     * @return The SaveChoice that was made.
      */
-    public void showSavePopup() {
-        Stage stage = new Stage();
+    public SaveChoice showSavePopup() {
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/paint/fxml/save_popup.fxml"));
         Parent root = null;
         try {
-            root = FXMLLoader.load(getClass().getResource("/paint/fxml/save_popup.fxml"));
-        } catch(IOException e) {
+            root = (Parent)loader.load();
+        } catch (IOException e) {
             e.printStackTrace();
         }
+        SavePopupController controller = (SavePopupController) loader.getController();
+        Stage stage = new Stage();
         Scene scene = new Scene(root);
         stage.setScene(scene);
-        stage.setTitle("");
+        stage.setTitle("Save");
         stage.setResizable(false);
-        stage.show();
+        controller.setStage(stage);
+        stage.showAndWait();
+        return controller.getChoice();
     }
 }
