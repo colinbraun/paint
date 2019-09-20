@@ -151,10 +151,11 @@ public class CanvasManager {
      * @param zoom
      */
     public void setZoom(int zoom) {
-        //ScrollPane pane = (ScrollPane)canvas.getParent().getParent().getParent();
-        if(canvas.getTransforms().size() == 0)
-            canvas.getTransforms().add(new Scale(zoom/100.0, zoom/100.0));
-        canvas.getTransforms().set(0, new Scale(zoom/100.0, zoom/100.0));
+        Parent parent = canvas.getParent();
+        if(parent.getTransforms().size() == 0)
+            parent.getTransforms().add(new Scale(zoom/100.0, zoom/100.0));
+        else
+            parent.getTransforms().set(0, new Scale(zoom/100.0, zoom/100.0));
     }
 
     /**

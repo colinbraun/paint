@@ -57,12 +57,12 @@
         </GridPane>
     </top>
     <center>
-        <Group>
-            <ScrollPane>
-                <Group>
+        <ScrollPane>
+            <Group>
+                <Pane>
                     <Canvas fx:id="canvas" width="400" height="400"/>
-                </Group>
-            </ScrollPane>
-        </Group>
+                </Pane>
+            </Group>
+        </ScrollPane>
     </center>
 </BorderPane>
