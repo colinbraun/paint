@@ -262,6 +262,8 @@ public class MainController extends BaseController {
         fileChooser = new FileChooser();
         // TODO: implement this for more file types and without hardcoded values
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PNG Files (*.png)", "*.png"));
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("BMP Files (*.bmp", "*.bmp"));
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("JPEG Files (*.jpg)", "*.jpg"));
         // Get all the toolbar toggleables
         for(Node node : findRootChildrenInPane(toolBar)) {
             if(node instanceof ToggleButton)

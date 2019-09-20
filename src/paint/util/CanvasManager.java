@@ -109,10 +109,14 @@ public class CanvasManager {
                 case SQUARE:
                     currentDrawing = new Square(event.getX(), event.getY());
                     break;
+                case PENCIL:
+                    currentDrawing = new FreeDraw(event.getX(), event.getY());
+                    break;
                 case COLOR_PICKER:
                     Color color = redrawImage.getPixelReader().getColor((int)event.getX(), (int)event.getY());
                     Main.mainController.getColorPicker().setValue(color);
                     setSelectedColor(color);
+                    break;
                 }
             changeMadeNotSaved = true;
         });
@@ -121,18 +125,6 @@ public class CanvasManager {
         canvas.addEventHandler(MouseEvent.MOUSE_DRAGGED, event -> {
             if(toolMode == null || toolMode == ToolMode.COLOR_PICKER)
                 return;
-            /*
-            switch(drawMode) {
-                case LINE:
-                    redraw();
-                    currentDrawing.setEnd(event.getX(), event.getY());
-                    currentDrawing.draw(context);
-                    break;
-                case ELLIPSE:
-                    redraw();
-                    currentDrawing.setEnd(event.getX(), event.getY());
-                    currentDrawing.draw(context);
-            }*/
             redraw();
             currentDrawing.setEnd(event.getX(), event.getY());
             currentDrawing.draw(context);
@@ -143,16 +135,6 @@ public class CanvasManager {
         canvas.addEventHandler(MouseEvent.MOUSE_RELEASED, event -> {
             if(toolMode == null || toolMode == ToolMode.COLOR_PICKER)
                 return;
-            /*
-            switch(drawMode) {
-                case LINE:
-                    currentDrawing.setEnd(event.getX(), event.getY());
-                    currentDrawing.draw(context);
-                    break;
-                case ELLIPSE:
-                    currentDrawing.setEnd(event.getX(), event.getY());
-                    currentDrawing.draw(context);
-            }*/
             undoStack.add(redrawImage);
             redraw();
             currentDrawing.setEnd(event.getX(), event.getY());
