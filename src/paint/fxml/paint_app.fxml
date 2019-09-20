@@ -5,6 +5,7 @@
 <?import javafx.scene.canvas.Canvas?>
 
 <?import javafx.scene.text.Text?>
+<?import javafx.scene.Group?>
 <BorderPane fx:controller="paint.controller.MainController" xmlns:fx="http://javafx.com/fxml">
     <top>
         <GridPane>
@@ -48,13 +49,20 @@
                     <Slider fx:id="lineWidthSlider" showTickLabels="true" showTickMarks="true" majorTickUnit="2" minorTickCount="1" value="1" min="0" max="10" prefWidth="300"/>
                     <Text>Line Width</Text>
                 </VBox>
+                <VBox>
+                    <Label text="Zoom:"/>
+                    <TextField fx:id="zoomField" onAction="#handleZoomField"/>
+                </VBox>
             </HBox>
         </GridPane>
     </top>
     <center>
-        <ScrollPane>
-            <Canvas fx:id="canvas" width="400" height="400">
-            </Canvas>
-        </ScrollPane>
+        <Group>
+            <ScrollPane>
+                <Group>
+                    <Canvas fx:id="canvas" width="400" height="400"/>
+                </Group>
+            </ScrollPane>
+        </Group>
     </center>
 </BorderPane>

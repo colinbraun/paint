@@ -7,11 +7,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
+import javafx.scene.transform.Scale;
 import javafx.stage.Stage;
 import paint.Main;
 import paint.constant.ToolMode;
@@ -142,6 +144,17 @@ public class CanvasManager {
             redrawImage = canvas.snapshot(null, null);
             changeMadeNotSaved = true;
         });
+    }
+
+    /**
+     * Set the zoom level on the canvas (in percent)
+     * @param zoom
+     */
+    public void setZoom(int zoom) {
+        //ScrollPane pane = (ScrollPane)canvas.getParent().getParent().getParent();
+        if(canvas.getTransforms().size() == 0)
+            canvas.getTransforms().add(new Scale(zoom/100.0, zoom/100.0));
+        canvas.getTransforms().set(0, new Scale(zoom/100.0, zoom/100.0));
     }
 
     /**

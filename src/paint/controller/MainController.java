@@ -6,10 +6,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.control.ColorPicker;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.Slider;
-import javafx.scene.control.ToggleButton;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -67,6 +64,7 @@ public class MainController extends BaseController {
     @FXML private ToggleButton togglePencil;
     private ToggleGroup tools;
     @FXML private HBox toolBar;
+    @FXML private TextField zoomField;
     /**
      * Slider that controls the width of drawn lines/shapes
      */
@@ -254,6 +252,14 @@ public class MainController extends BaseController {
         canvasManager.redo();
     }
 
+    /**
+     * Runs when enter is hit while the zoom field is selected
+     */
+    @FXML
+    public void handleZoomField() {
+        canvasManager.setZoom(Integer.parseInt(zoomField.textProperty().getValue()));
+    }
+
     // This will run AFTER all the component fields have been initialized, unlike the constructor
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -271,6 +277,15 @@ public class MainController extends BaseController {
         }
         //tools.addToggles(toggleColorPicker, toggleDrawCircle, toggleDrawEllipse, toggleDrawLine, toggleDrawRectangle, toggleDrawSquare, togglePencil);
         canvasManager = new CanvasManager(canvas);
+
+
+        //Set up zoom value listener
+        zoomField.textProperty().addListener((observable, oldValue, newValue) -> {
+            // Prevent non-numeric values from being entered
+            if(newValue.matches(".*\\D.*")) {
+                zoomField.textProperty().setValue(oldValue);
+            }
+        });
     }
 
     /**
