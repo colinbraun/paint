@@ -12,7 +12,7 @@
                 <ColumnConstraints percentWidth="100"/>
             </columnConstraints>
             <MenuBar fx:id="menuBar" GridPane.rowIndex="0" GridPane.columnIndex="0">
-                <Menu text="File">
+                <Menu text="_File">
                     <MenuItem text="Open" onAction="#handleOpen" accelerator="Shortcut+O"/>
                     <MenuItem text="Save" onAction="#handleSave" accelerator="Shortcut+S"/>
                     <MenuItem text="Save As" onAction="#handleSaveAs"/>
@@ -27,9 +27,23 @@
                     <MenuItem text="About" onAction="#handleAbout"/>
                 </Menu>
             </MenuBar>
-            <HBox GridPane.rowIndex="1" GridPane.columnIndex="0">
-                <ColorPicker fx:id="colorPicker" onAction="#handleColorPicker"/>
-                <ToggleButton fx:id="toggleDrawLine" text="Line" onAction="#handleToggleDrawLine"/>
+            <HBox fx:id="toolBar" GridPane.rowIndex="1" GridPane.columnIndex="0">
+                <VBox>
+                    <ColorPicker fx:id="colorPicker" onAction="#handleColorPicker"/>
+                    <ToggleButton fx:id="toggleColorPicker" text="Dropper" onAction="#handleToggleColorPicker"/>
+                </VBox>
+                <VBox>
+                    <ToggleButton fx:id="togglePencil" text="Pencil" onAction="#handleTogglePencil"/>
+                    <ToggleButton fx:id="toggleDrawLine" text="Line" onAction="#handleToggleDrawLine"/>
+                </VBox>
+                <VBox>
+                    <ToggleButton fx:id="toggleDrawCircle" text="Circle" onAction="#handleToggleDrawCircle"/>
+                    <ToggleButton fx:id="toggleDrawEllipse" text="Ellipse" onAction="#handleToggleDrawEllipse"/>
+                </VBox>
+                <VBox>
+                    <ToggleButton fx:id="toggleDrawSquare" text="Square" onAction="#handleToggleDrawSquare"/>
+                    <ToggleButton fx:id="toggleDrawRectangle" text="Rectangle" onAction="#handleToggleDrawRectangle"/>
+                </VBox>
                 <VBox alignment="CENTER">
                     <Slider fx:id="lineWidthSlider" showTickLabels="true" showTickMarks="true" majorTickUnit="2" minorTickCount="1" value="1" min="0" max="10" prefWidth="300"/>
                     <Text>Line Width</Text>

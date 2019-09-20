@@ -5,17 +5,10 @@ import javafx.scene.canvas.GraphicsContext;
 /**
  * A class to represent a line
  */
-public class Line implements Drawable {
-    private double startX;
-    private double startY;
-    private double endX;
-    private double endY;
+public class Line extends Drawable {
 
     public Line(double startX, double startY, double endX, double endY) {
-        this.startX = startX;
-        this.startY = startY;
-        this.endX = endX;
-        this.endY = endY;
+        super(startX, startY, endX, endY);
     }
 
     /**
@@ -27,36 +20,8 @@ public class Line implements Drawable {
         this(x, y, x, y);
     }
 
-    public double getStartX() {
-        return startX;
-    }
-
-    public double getStartY() {
-        return startY;
-    }
-
-    public double getEndX() {
-        return endX;
-    }
-
-    public double getEndY() {
-        return endY;
-    }
-
-    public Line setStart(double startX, double startY) {
-        this.startX = startX;
-        this.startY = startY;
-        return this;
-    }
-
-    public Line setEnd(double endX, double endY) {
-        this.endX = endX;
-        this.endY = endY;
-        return this;
-    }
-
     @Override
     public void draw(GraphicsContext context) {
-        context.strokeLine(startX, startY, endX, endY);
+        context.strokeLine(x0, y0, x1, y1);
     }
 }

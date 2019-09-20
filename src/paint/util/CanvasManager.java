@@ -13,11 +13,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
-import paint.constant.DrawMode;
+import paint.Main;
+import paint.constant.ToolMode;
 import paint.constant.SaveChoice;
 import paint.controller.SavePopupController;
-import paint.shape.Drawable;
-import paint.shape.Line;
+import paint.shape.*;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -38,7 +38,7 @@ public class CanvasManager {
     /**
      * The draw mode the canvas is in
      */
-    private DrawMode drawMode;
+    private ToolMode toolMode;
     /**
      * The canvas' GraphicsContext, avoids constantly having to call canvas.getGraphicsContext2D()
      */
@@ -79,7 +79,8 @@ public class CanvasManager {
         selectedColor = Color.BLACK;
         context = canvas.getGraphicsContext2D();
         initEvents();
-        undoStack.push(canvas.snapshot(null, null));
+        redrawImage = canvas.snapshot(null, null);
+        redraw();
     }
 
     /**
@@ -88,41 +89,75 @@ public class CanvasManager {
     private void initEvents() {
         // Handle mouse pressed event
         canvas.addEventHandler(MouseEvent.MOUSE_PRESSED, (event) -> {
-            if(drawMode == null)
+            if(toolMode == null)
                 return;
 
             redrawImage = canvas.snapshot(null, null);
-            switch(drawMode) {
+            switch(toolMode) {
                 case LINE:
                     currentDrawing = new Line(event.getX(), event.getY());
                     break;
-            }
+                case ELLIPSE:
+                    currentDrawing = new Ellipse(event.getX(), event.getY());
+                    break;
+                case RECTANGLE:
+                    currentDrawing = new Rectangle(event.getX(), event.getY());
+                    break;
+                case CIRCLE:
+                    currentDrawing = new Circle(event.getX(), event.getY());
+                    break;
+                case SQUARE:
+                    currentDrawing = new Square(event.getX(), event.getY());
+                    break;
+                case COLOR_PICKER:
+                    Color color = redrawImage.getPixelReader().getColor((int)event.getX(), (int)event.getY());
+                    Main.mainController.getColorPicker().setValue(color);
+                    setSelectedColor(color);
+                }
             changeMadeNotSaved = true;
         });
 
         //Handle mouse dragged event (button held down and moved)
         canvas.addEventHandler(MouseEvent.MOUSE_DRAGGED, event -> {
-            if(drawMode == null)
+            if(toolMode == null || toolMode == ToolMode.COLOR_PICKER)
                 return;
+            /*
             switch(drawMode) {
                 case LINE:
                     redraw();
-                    ((Line)currentDrawing).setEnd(event.getX(), event.getY()).draw(context);
-                    // Do line preview things
+                    currentDrawing.setEnd(event.getX(), event.getY());
+                    currentDrawing.draw(context);
                     break;
-            }
+                case ELLIPSE:
+                    redraw();
+                    currentDrawing.setEnd(event.getX(), event.getY());
+                    currentDrawing.draw(context);
+            }*/
+            redraw();
+            currentDrawing.setEnd(event.getX(), event.getY());
+            currentDrawing.draw(context);
             changeMadeNotSaved = true;
-        });
+    });
 
         //Handle mouse released event
         canvas.addEventHandler(MouseEvent.MOUSE_RELEASED, event -> {
-            if(drawMode == null)
+            if(toolMode == null || toolMode == ToolMode.COLOR_PICKER)
                 return;
+            /*
             switch(drawMode) {
                 case LINE:
-                    ((Line)currentDrawing).setEnd(event.getX(), event.getY()).draw(context);
+                    currentDrawing.setEnd(event.getX(), event.getY());
+                    currentDrawing.draw(context);
                     break;
-            }
+                case ELLIPSE:
+                    currentDrawing.setEnd(event.getX(), event.getY());
+                    currentDrawing.draw(context);
+            }*/
+            undoStack.add(redrawImage);
+            redraw();
+            currentDrawing.setEnd(event.getX(), event.getY());
+            currentDrawing.draw(context);
+            redrawImage = canvas.snapshot(null, null);
             changeMadeNotSaved = true;
         });
     }
@@ -131,8 +166,8 @@ public class CanvasManager {
      * Set the draw mode for the canvas
      * @param mode the draw mode to set the canvas to
      */
-    public void setDrawMode(DrawMode mode) {
-        this.drawMode = mode;
+    public void setToolMode(ToolMode mode) {
+        this.toolMode = mode;
     }
 
     /**

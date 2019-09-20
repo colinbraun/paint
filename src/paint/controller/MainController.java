@@ -2,6 +2,7 @@ package paint.controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -9,16 +10,22 @@ import javafx.scene.control.ColorPicker;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.Slider;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import paint.Main;
-import paint.constant.DrawMode;
+import paint.constant.ToolMode;
 import paint.util.CanvasManager;
+import paint.util.ToggleGroup;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class MainController extends BaseController {
@@ -39,21 +46,34 @@ public class MainController extends BaseController {
      * The fileChooser used to open and save files
      */
     private FileChooser fileChooser;
+
+    public ColorPicker getColorPicker() {
+        return colorPicker;
+    }
+
     /**
      * The colorPicker used to choose the color to draw with
      */
     @FXML private ColorPicker colorPicker;
     /**
-     * Toggle button to toggle drawing lines
+     * Toggle buttons to handle tool modes
      */
     @FXML private ToggleButton toggleDrawLine;
-
+    @FXML private ToggleButton toggleDrawEllipse;
+    @FXML private ToggleButton toggleDrawRectangle;
+    @FXML private ToggleButton toggleDrawSquare;
+    @FXML private ToggleButton toggleDrawCircle;
+    @FXML private ToggleButton toggleColorPicker;
+    @FXML private ToggleButton togglePencil;
+    private ToggleGroup tools;
+    @FXML private HBox toolBar;
     /**
      * Slider that controls the width of drawn lines/shapes
      */
     @FXML private Slider lineWidthSlider;
 
     public MainController() {
+        tools = new ToggleGroup();
         Main.mainController = this;
     }
 
@@ -136,10 +156,65 @@ public class MainController extends BaseController {
      */
     @FXML
     public void handleToggleDrawLine() {
+        tools.unToggleAllBut(toggleDrawLine);
         if(toggleDrawLine.isSelected())
-            canvasManager.setDrawMode(DrawMode.LINE);
+            canvasManager.setToolMode(ToolMode.LINE);
         else
-            canvasManager.setDrawMode(null);
+            canvasManager.setToolMode(null);
+    }
+
+    @FXML
+    public void handleToggleDrawEllipse() {
+        tools.unToggleAllBut(toggleDrawEllipse);
+        if(toggleDrawEllipse.isSelected())
+            canvasManager.setToolMode(ToolMode.ELLIPSE);
+        else
+            canvasManager.setToolMode(null);
+    }
+
+    @FXML
+    public void handleToggleDrawRectangle() {
+        tools.unToggleAllBut(toggleDrawRectangle);
+        if(toggleDrawRectangle.isSelected())
+            canvasManager.setToolMode(ToolMode.RECTANGLE);
+        else
+            canvasManager.setToolMode(null);
+    }
+
+    @FXML
+    public void handleToggleDrawSquare() {
+        tools.unToggleAllBut(toggleDrawSquare);
+        if(toggleDrawSquare.isSelected())
+            canvasManager.setToolMode(ToolMode.SQUARE);
+        else
+            canvasManager.setToolMode(null);
+    }
+
+    @FXML
+    public void handleToggleDrawCircle() {
+        tools.unToggleAllBut(toggleDrawCircle);
+        if(toggleDrawCircle.isSelected())
+            canvasManager.setToolMode(ToolMode.CIRCLE);
+        else
+            canvasManager.setToolMode(null);
+    }
+
+    @FXML
+    public void handleToggleColorPicker() {
+        tools.unToggleAllBut(toggleColorPicker);
+        if(toggleColorPicker.isSelected())
+            canvasManager.setToolMode(ToolMode.COLOR_PICKER);
+        else
+            canvasManager.setToolMode(null);
+    }
+
+    @FXML
+    public void handleTogglePencil() {
+        tools.unToggleAllBut(togglePencil);
+        if(togglePencil.isSelected())
+            canvasManager.setToolMode(ToolMode.PENCIL);
+        else
+            canvasManager.setToolMode(null);
     }
 
     /**
@@ -187,6 +262,41 @@ public class MainController extends BaseController {
         fileChooser = new FileChooser();
         // TODO: implement this for more file types and without hardcoded values
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PNG Files (*.png)", "*.png"));
+        // Get all the toolbar toggleables
+        for(Node node : findRootChildrenInPane(toolBar)) {
+            if(node instanceof ToggleButton)
+                tools.addToggles((ToggleButton)node);
+        }
+        //tools.addToggles(toggleColorPicker, toggleDrawCircle, toggleDrawEllipse, toggleDrawLine, toggleDrawRectangle, toggleDrawSquare, togglePencil);
         canvasManager = new CanvasManager(canvas);
+    }
+
+    /**
+     * Find all of the non-pane children of the given pane
+     * @param pane the pane to find the children of
+     * @param <T> W.I.P. Intended to find a specific type of child
+     * @return
+     */
+    public static <T extends Node> List<T> findRootChildrenInPane(Pane pane) {
+        List<T> list = new ArrayList<>();
+        findRootChildrenInPaneOfTypeHelper(pane, list);
+        return list;
+    }
+
+    // Internal helper method for findRootChildrenInPane
+    private static <T extends Node> void findRootChildrenInPaneOfTypeHelper(Pane pane, List<T> out) {
+        for(Node node : pane.getChildren()) {
+            if(node instanceof Pane) {
+                findRootChildrenInPaneOfTypeHelper((Pane)node, out);
+            }
+            else {
+                try {
+                    T t = (T)node;
+                    out.add(t);
+                } catch(ClassCastException e) {
+                    // This is expected to happen some times
+                }
+            }
+        }
     }
 }

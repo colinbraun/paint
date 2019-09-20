@@ -3,11 +3,12 @@ package paint.constant;
 /**
  * Enum to hold mode constants
  */
-public enum DrawMode {
+public enum ToolMode {
     LINE(),
     ELLIPSE(),
     CIRCLE(),
     RECTANGLE(),
     SQUARE(),
-    PENCIL()
+    PENCIL(),
+    COLOR_PICKER()
 }

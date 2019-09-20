@@ -10,6 +10,9 @@ import java.util.ResourceBundle;
 
 public class SavePopupController extends BaseController {
 
+    /**
+     * The stage that this popup controller is assigned to
+     */
     private Stage stage;
 
     /**
