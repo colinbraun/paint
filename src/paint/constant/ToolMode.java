@@ -11,6 +11,7 @@ public enum ToolMode {
     SQUARE(),
     PENCIL(),
     TEXT(),
+    POLYGON(),
     ERASER(),
     COLOR_PICKER()
 }

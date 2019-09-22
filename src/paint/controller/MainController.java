@@ -269,6 +269,13 @@ public class MainController extends BaseController {
             canvasManager.setToolMode(null);
     }
 
+    @FXML
+    public void handleTogglePolygon() {
+        /*
+        Do things
+         */
+    }
+
     /**
      * Runs when a font is selected from the ComboBox (drop down)
      */
