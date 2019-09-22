@@ -62,6 +62,8 @@
                 <ComboBox fx:id="fontChooser" promptText="Font Family" onAction="#handleFontChooser"/>
                 <Label text="Font size: "/>
                 <TextField fx:id="fontSizeField" text="12"/>
+                <Label text="Text: "/>
+                <TextField fx:id="textField"/>
             </HBox>
         </GridPane>
     </top>

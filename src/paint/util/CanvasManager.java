@@ -73,6 +73,10 @@ public class CanvasManager {
      * A stack containing images to load when a redo is request
      */
     private Stack<Image> redoStack;
+    /**
+     * The text that will be drawn
+     */
+    private String drawText;
 
     public CanvasManager(@NotNull Canvas canvas) {
         undoStack = new Stack<>();
@@ -115,7 +119,7 @@ public class CanvasManager {
                     currentDrawing = new FreeDraw(event.getX(), event.getY());
                     break;
                 case TEXT:
-                    currentDrawing = new Text(event.getX(), event.getY());
+                    currentDrawing = new Text(event.getX(), event.getY(), drawText);
                     break;
                 case ERASER:
                     currentDrawing = new Eraser(event.getX(), event.getY());
@@ -197,6 +201,10 @@ public class CanvasManager {
 
     public void setTextFont(Font font) {
         context.setFont(font);
+    }
+
+    public void setDrawText(String text) {
+        drawText = text;
     }
 
     /**

@@ -76,6 +76,7 @@ public class MainController extends BaseController {
      */
     @FXML private ComboBox<String> fontChooser;
     @FXML private TextField fontSizeField;
+    @FXML private TextField textField;
     /**
      * Slider that controls the width of drawn lines/shapes
      */
@@ -361,6 +362,11 @@ public class MainController extends BaseController {
             else if(!newValue.equals("")) {
                 canvasManager.setTextFont(new Font(fontChooser.getValue(), Integer.parseInt(fontSizeField.getText())));
             }
+        });
+
+        // Set up text field
+        textField.textProperty().addListener((observable, oldValue, newValue) -> {
+            canvasManager.setDrawText(newValue);
         });
     }
 
