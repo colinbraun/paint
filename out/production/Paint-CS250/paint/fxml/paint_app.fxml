@@ -60,7 +60,7 @@
             </HBox>
             <HBox fx:id="toolBarRow2" GridPane.rowIndex="2" GridPane.columnIndex="0">
                 <ComboBox fx:id="fontChooser" promptText="Font Family" onAction="#handleFontChooser"/>
-                <Label fx:id="fontLabel" text="Font size: "/>
+                <Label text="Font size: "/>
                 <TextField fx:id="fontSizeField" text="12"/>
             </HBox>
         </GridPane>

@@ -75,7 +75,6 @@ public class MainController extends BaseController {
      * Control for font when drawing text
      */
     @FXML private ComboBox<String> fontChooser;
-    @FXML private Label fontLabel;
     @FXML private TextField fontSizeField;
     /**
      * Slider that controls the width of drawn lines/shapes
@@ -173,6 +172,9 @@ public class MainController extends BaseController {
             canvasManager.setToolMode(null);
     }
 
+    /**
+     * Runs when the ellipse ToggleButton is clicked
+     */
     @FXML
     public void handleToggleDrawEllipse() {
         tools.unToggleAllBut(toggleDrawEllipse);
@@ -182,6 +184,9 @@ public class MainController extends BaseController {
             canvasManager.setToolMode(null);
     }
 
+    /**
+     * Runs when the rectangle ToggleButton is clicked
+     */
     @FXML
     public void handleToggleDrawRectangle() {
         tools.unToggleAllBut(toggleDrawRectangle);
@@ -191,6 +196,9 @@ public class MainController extends BaseController {
             canvasManager.setToolMode(null);
     }
 
+    /**
+     * Runs when the square ToggleButton is clicked
+     */
     @FXML
     public void handleToggleDrawSquare() {
         tools.unToggleAllBut(toggleDrawSquare);
@@ -200,6 +208,9 @@ public class MainController extends BaseController {
             canvasManager.setToolMode(null);
     }
 
+    /**
+     * Runs when the circle ToggleButton is clicked
+     */
     @FXML
     public void handleToggleDrawCircle() {
         tools.unToggleAllBut(toggleDrawCircle);
@@ -209,6 +220,9 @@ public class MainController extends BaseController {
             canvasManager.setToolMode(null);
     }
 
+    /**
+     * Runs when the color picker (dropper) ToggleButton is clicked
+     */
     @FXML
     public void handleToggleColorPicker() {
         tools.unToggleAllBut(toggleColorPicker);
@@ -218,6 +232,9 @@ public class MainController extends BaseController {
             canvasManager.setToolMode(null);
     }
 
+    /**
+     * Runs when the pencil ToggleButton is clicked
+     */
     @FXML
     public void handleTogglePencil() {
         tools.unToggleAllBut(togglePencil);
@@ -227,6 +244,9 @@ public class MainController extends BaseController {
             canvasManager.setToolMode(null);
     }
 
+    /**
+     * Runs when the text ToggleButton is clicked
+     */
     @FXML
     public void handleToggleText() {
         tools.unToggleAllBut(toggleText);
@@ -236,6 +256,9 @@ public class MainController extends BaseController {
             canvasManager.setToolMode(null);
     }
 
+    /**
+     * Runs when the eraser ToggleButton is clicked
+     */
     @FXML
     public void handleToggleEraser() {
         tools.unToggleAllBut(toggleEraser);
@@ -245,8 +268,13 @@ public class MainController extends BaseController {
             canvasManager.setToolMode(null);
     }
 
+    /**
+     * Runs when a font is selected from the ComboBox (drop down)
+     */
     @FXML
     public void handleFontChooser() {
+        if(fontSizeField.getText().equals(""))
+            return;
         canvasManager.setTextFont(new Font(fontChooser.getValue(), Integer.parseInt(fontSizeField.getText())));
     }
 

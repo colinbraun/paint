@@ -15,6 +15,11 @@ public abstract class Drawable {
         this.y1 = y1;
     }
 
+    /**
+     * Set the ending point of the drawable
+     * @param x1 the ending x value
+     * @param y1 the ending y value
+     */
     public void setEnd(double x1, double y1) {
         this.x1 = x1;
         this.y1 = y1;

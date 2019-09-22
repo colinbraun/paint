@@ -1,7 +1,7 @@
 package paint.constant;
 
 /**
- * Enum to hold mode constants
+ * Enum to hold tool mode constants
  */
 public enum ToolMode {
     LINE(),
