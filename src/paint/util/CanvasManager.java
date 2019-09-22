@@ -77,6 +77,10 @@ public class CanvasManager {
      * The text that will be drawn
      */
     private String drawText;
+    /**
+     * The number of sides to draw the polygon with when the Polygon tool is selected
+     */
+    private int polygonSides;
 
     public CanvasManager(@NotNull Canvas canvas) {
         undoStack = new Stack<>();
@@ -123,6 +127,9 @@ public class CanvasManager {
                     break;
                 case ERASER:
                     currentDrawing = new Eraser(event.getX(), event.getY());
+                    break;
+                case POLYGON:
+                    currentDrawing = new Polygon(event.getX(), event.getY(), polygonSides);
                     break;
                 case COLOR_PICKER:
                     Color color = redrawImage.getPixelReader().getColor((int)event.getX(), (int)event.getY());
@@ -205,6 +212,10 @@ public class CanvasManager {
 
     public void setDrawText(String text) {
         drawText = text;
+    }
+
+    public void setPolygonSides(int sides) {
+        polygonSides = sides;
     }
 
     /**

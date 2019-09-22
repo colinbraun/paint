@@ -49,6 +49,9 @@
                     <ToggleButton fx:id="toggleText" text="Text" onAction="#handleToggleText"/>
                     <ToggleButton fx:id="toggleEraser" text="Eraser" onAction="#handleToggleEraser"/>
                 </VBox>
+                <VBox>
+                    <ToggleButton fx:id="togglePolygon" text="Polygon" onAction="#handleTogglePolygon"/>
+                </VBox>
                 <VBox alignment="CENTER">
                     <Slider fx:id="lineWidthSlider" showTickLabels="true" showTickMarks="true" majorTickUnit="2" minorTickCount="1" value="1" min="0" max="10" prefWidth="300"/>
                     <Label fx:id="lineWidthLabel" text="Line Width"/>

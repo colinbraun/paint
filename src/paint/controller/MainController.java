@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import paint.Main;
 import paint.constant.ToolMode;
+import paint.popup.FieldPopup;
 import paint.util.CanvasManager;
 import paint.util.ToggleGroup;
 
@@ -65,6 +66,7 @@ public class MainController extends BaseController {
     @FXML private ToggleButton togglePencil;
     @FXML private ToggleButton toggleText;
     @FXML private ToggleButton toggleEraser;
+    @FXML private ToggleButton togglePolygon;
     private ToggleGroup tools;
     @FXML private HBox toolBarRow1;
     /**
@@ -271,9 +273,24 @@ public class MainController extends BaseController {
 
     @FXML
     public void handleTogglePolygon() {
-        /*
-        Do things
-         */
+        tools.unToggleAllBut(togglePolygon);
+        if(togglePolygon.isSelected()) {
+            FieldPopup popup = new FieldPopup("Polygon");
+            TextField field = popup.addField("Num Sides: ", "4");
+            field.textProperty().addListener((observable, oldValue, newValue) -> {
+                if(newValue.matches(".*\\D.*")) {
+                    fontSizeField.textProperty().setValue(oldValue);
+                }
+                else if(!newValue.equals("")) {
+                    canvasManager.setPolygonSides(Integer.parseInt(newValue));
+                }
+            });
+            popup.addSubmitButton("Submit");
+            popup.showAndWait();
+            canvasManager.setToolMode(ToolMode.POLYGON);
+        }
+        else
+            canvasManager.setToolMode(null);
     }
 
     /**
