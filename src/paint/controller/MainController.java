@@ -10,6 +10,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -62,14 +63,25 @@ public class MainController extends BaseController {
     @FXML private ToggleButton toggleDrawCircle;
     @FXML private ToggleButton toggleColorPicker;
     @FXML private ToggleButton togglePencil;
+    @FXML private ToggleButton toggleText;
+    @FXML private ToggleButton toggleEraser;
     private ToggleGroup tools;
-    @FXML private HBox toolBar;
+    @FXML private HBox toolBarRow1;
+    /**
+     * Zoom field. Requires pressing enter to apply change
+     */
     @FXML private TextField zoomField;
+    /**
+     * Control for font when drawing text
+     */
+    @FXML private ComboBox<String> fontChooser;
+    @FXML private Label fontLabel;
+    @FXML private TextField fontSizeField;
     /**
      * Slider that controls the width of drawn lines/shapes
      */
     @FXML private Slider lineWidthSlider;
-
+    @FXML private Label lineWidthLabel;
     public MainController() {
         tools = new ToggleGroup();
         Main.mainController = this;
@@ -215,6 +227,29 @@ public class MainController extends BaseController {
             canvasManager.setToolMode(null);
     }
 
+    @FXML
+    public void handleToggleText() {
+        tools.unToggleAllBut(toggleText);
+        if(toggleText.isSelected())
+            canvasManager.setToolMode(ToolMode.TEXT);
+        else
+            canvasManager.setToolMode(null);
+    }
+
+    @FXML
+    public void handleToggleEraser() {
+        tools.unToggleAllBut(toggleEraser);
+        if(toggleEraser.isSelected())
+            canvasManager.setToolMode(ToolMode.ERASER);
+        else
+            canvasManager.setToolMode(null);
+    }
+
+    @FXML
+    public void handleFontChooser() {
+        canvasManager.setTextFont(new Font(fontChooser.getValue(), Integer.parseInt(fontSizeField.getText())));
+    }
+
     /**
      * Runs when Edit -> Resize is clicked
      * Note that all the button handling in the resize window happens in {@link ResizeController}
@@ -271,7 +306,7 @@ public class MainController extends BaseController {
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("BMP Files (*.bmp", "*.bmp"));
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("JPEG Files (*.jpg)", "*.jpg"));
         // Get all the toolbar toggleables
-        for(Node node : findRootChildrenInPane(toolBar)) {
+        for(Node node : findRootChildrenInPane(toolBarRow1)) {
             if(node instanceof ToggleButton)
                 tools.addToggles((ToggleButton)node);
         }
@@ -279,11 +314,24 @@ public class MainController extends BaseController {
         canvasManager = new CanvasManager(canvas);
 
 
-        //Set up zoom value listener
+        // Set up zoom value listener
         zoomField.textProperty().addListener((observable, oldValue, newValue) -> {
             // Prevent non-numeric values from being entered
             if(newValue.matches(".*\\D.*")) {
                 zoomField.textProperty().setValue(oldValue);
+            }
+        });
+
+        fontChooser.getItems().setAll(Font.getFamilies());
+
+        // Set up font size field
+        fontSizeField.textProperty().addListener((observable, oldValue, newValue) -> {
+            // Prevent non-numeric values from being entered
+            if(newValue.matches(".*\\D.*")) {
+                fontSizeField.textProperty().setValue(oldValue);
+            }
+            else if(!newValue.equals("")) {
+                canvasManager.setTextFont(new Font(fontChooser.getValue(), Integer.parseInt(fontSizeField.getText())));
             }
         });
     }
@@ -291,7 +339,7 @@ public class MainController extends BaseController {
     /**
      * Find all of the non-pane children of the given pane
      * @param pane the pane to find the children of
-     * @param <T> W.I.P. Intended to find a specific type of child
+     * @param <T> W.I.P. Intended to find a specific type of child. Currently only returns a list of {@link Node}
      * @return
      */
     public static <T extends Node> List<T> findRootChildrenInPane(Pane pane) {

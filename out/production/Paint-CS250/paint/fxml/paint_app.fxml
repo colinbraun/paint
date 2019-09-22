@@ -28,7 +28,7 @@
                     <MenuItem text="About" onAction="#handleAbout"/>
                 </Menu>
             </MenuBar>
-            <HBox fx:id="toolBar" GridPane.rowIndex="1" GridPane.columnIndex="0">
+            <HBox fx:id="toolBarRow1" GridPane.rowIndex="1" GridPane.columnIndex="0">
                 <VBox>
                     <ColorPicker fx:id="colorPicker" onAction="#handleColorPicker"/>
                     <ToggleButton fx:id="toggleColorPicker" text="Dropper" onAction="#handleToggleColorPicker"/>
@@ -45,24 +45,33 @@
                     <ToggleButton fx:id="toggleDrawSquare" text="Square" onAction="#handleToggleDrawSquare"/>
                     <ToggleButton fx:id="toggleDrawRectangle" text="Rectangle" onAction="#handleToggleDrawRectangle"/>
                 </VBox>
+                <VBox>
+                    <ToggleButton fx:id="toggleText" text="Text" onAction="#handleToggleText"/>
+                    <ToggleButton fx:id="toggleEraser" text="Eraser" onAction="#handleToggleEraser"/>
+                </VBox>
                 <VBox alignment="CENTER">
                     <Slider fx:id="lineWidthSlider" showTickLabels="true" showTickMarks="true" majorTickUnit="2" minorTickCount="1" value="1" min="0" max="10" prefWidth="300"/>
-                    <Text>Line Width</Text>
+                    <Label fx:id="lineWidthLabel" text="Line Width"/>
                 </VBox>
                 <VBox>
                     <Label text="Zoom:"/>
-                    <TextField fx:id="zoomField" onAction="#handleZoomField"/>
+                    <TextField fx:id="zoomField" text="100" onAction="#handleZoomField"/>
                 </VBox>
+            </HBox>
+            <HBox fx:id="toolBarRow2" GridPane.rowIndex="2" GridPane.columnIndex="0">
+                <ComboBox fx:id="fontChooser" promptText="Font Family" onAction="#handleFontChooser"/>
+                <Label fx:id="fontLabel" text="Font size: "/>
+                <TextField fx:id="fontSizeField" text="12"/>
             </HBox>
         </GridPane>
     </top>
     <center>
-            <ScrollPane>
-                <Group>
-                    <Pane>
-                        <Canvas fx:id="canvas" width="400" height="400"/>
-                    </Pane>
-                </Group>
-            </ScrollPane>
+        <ScrollPane>
+            <Group>
+                <Pane>
+                    <Canvas fx:id="canvas" width="400" height="400"/>
+                </Pane>
+            </Group>
+        </ScrollPane>
     </center>
 </BorderPane>

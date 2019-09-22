@@ -7,19 +7,19 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
+import javafx.scene.text.Font;
 import javafx.scene.transform.Scale;
 import javafx.stage.Stage;
 import paint.Main;
 import paint.constant.ToolMode;
 import paint.constant.SaveChoice;
 import paint.controller.SavePopupController;
-import paint.shape.*;
+import paint.draw.*;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -114,6 +114,12 @@ public class CanvasManager {
                 case PENCIL:
                     currentDrawing = new FreeDraw(event.getX(), event.getY());
                     break;
+                case TEXT:
+                    currentDrawing = new Text(event.getX(), event.getY());
+                    break;
+                case ERASER:
+                    currentDrawing = new Eraser(event.getX(), event.getY());
+                    break;
                 case COLOR_PICKER:
                     Color color = redrawImage.getPixelReader().getColor((int)event.getX(), (int)event.getY());
                     Main.mainController.getColorPicker().setValue(color);
@@ -127,6 +133,9 @@ public class CanvasManager {
         canvas.addEventHandler(MouseEvent.MOUSE_DRAGGED, event -> {
             if(toolMode == null || toolMode == ToolMode.COLOR_PICKER)
                 return;
+
+            // This will work for your TYPICAL Drawables. It may happen that something special need be done.
+            // In which case, might need a switch here
             redraw();
             currentDrawing.setEnd(event.getX(), event.getY());
             currentDrawing.draw(context);
@@ -137,6 +146,9 @@ public class CanvasManager {
         canvas.addEventHandler(MouseEvent.MOUSE_RELEASED, event -> {
             if(toolMode == null || toolMode == ToolMode.COLOR_PICKER)
                 return;
+
+            // This will work for your TYPICAL Drawables. It may happen that something special need be done.
+            // In which case, might need a switch here
             undoStack.add(redrawImage);
             redraw();
             currentDrawing.setEnd(event.getX(), event.getY());
@@ -181,6 +193,10 @@ public class CanvasManager {
         this.selectedColor = color;
         context.setFill(color);
         context.setStroke(color);
+    }
+
+    public void setTextFont(Font font) {
+        context.setFont(font);
     }
 
     /**
