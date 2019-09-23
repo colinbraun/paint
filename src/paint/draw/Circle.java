@@ -13,7 +13,7 @@ public class Circle extends Ellipse {
     }
 
     @Override
-    public void draw(GraphicsContext context) {
+    public void drawFinal(GraphicsContext context) {
         double maxWidth = Math.min(Math.abs(x1-x0), Math.abs(y1-y0));
         if(Math.abs(y1-y0) > maxWidth)
             if(y1 < y0)
@@ -25,6 +25,6 @@ public class Circle extends Ellipse {
                 x1 = x0 - maxWidth;
             else
                 x1 = x0 + maxWidth;
-        super.draw(context);
+        super.drawFinal(context);
     }
 }

@@ -13,5 +13,6 @@ public enum ToolMode {
     TEXT(),
     POLYGON(),
     ERASER(),
+    SELECT(),
     COLOR_PICKER()
 }

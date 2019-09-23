@@ -36,6 +36,7 @@ public class FieldPopup extends Popup {
         this.root = new GridPane();
         this.gridRoot = (GridPane)root;
         setScene(new Scene(root));
+        setResizable(false);
     }
 
     /**

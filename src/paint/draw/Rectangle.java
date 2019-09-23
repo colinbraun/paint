@@ -13,7 +13,7 @@ public class Rectangle extends Drawable {
     }
 
     @Override
-    public void draw(GraphicsContext context) {
+    public void drawFinal(GraphicsContext context) {
         boolean xPositive = x1 - x0 >= 0;
         boolean yPositive = y1 - y0 >= 0;
         context.fillRect(xPositive ? x0 : x1, yPositive ? y0 : y1, xPositive ? x1-x0 : x0-x1, yPositive ? y1-y0 : y0-y1);

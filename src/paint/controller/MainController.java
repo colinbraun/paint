@@ -67,6 +67,7 @@ public class MainController extends BaseController {
     @FXML private ToggleButton toggleText;
     @FXML private ToggleButton toggleEraser;
     @FXML private ToggleButton togglePolygon;
+    @FXML private ToggleButton toggleSelect;
     private ToggleGroup tools;
     @FXML private HBox toolBarRow1;
     /**
@@ -253,8 +254,19 @@ public class MainController extends BaseController {
     @FXML
     public void handleToggleText() {
         tools.unToggleAllBut(toggleText);
-        if(toggleText.isSelected())
+        if(toggleText.isSelected()) {
+            FieldPopup popup = new FieldPopup("Text");
+            TextField textField = popup.addField("Text: ");
+            TextField sizeField = popup.addField("Font size: ", "12");
+            ComboBox<String> comboBox = (ComboBox)popup.addComponent(fontChooser);
+            popup.addSubmitButton("Submit");
+            popup.showAndWait();
+            try {
+                canvasManager.setTextFont(new Font(comboBox.getValue(), Integer.parseInt(sizeField.getText())));
+                canvasManager.setDrawText(textField.getText());
+            } catch(Exception e) {return;}
             canvasManager.setToolMode(ToolMode.TEXT);
+        }
         else
             canvasManager.setToolMode(null);
     }
@@ -276,10 +288,11 @@ public class MainController extends BaseController {
         tools.unToggleAllBut(togglePolygon);
         if(togglePolygon.isSelected()) {
             FieldPopup popup = new FieldPopup("Polygon");
-            TextField field = popup.addField("Num Sides: ", "4");
+            TextField field = popup.addField("Num Sides: ", "3");
+            canvasManager.setPolygonSides(Integer.parseInt(field.getText()));
             field.textProperty().addListener((observable, oldValue, newValue) -> {
                 if(newValue.matches(".*\\D.*")) {
-                    fontSizeField.textProperty().setValue(oldValue);
+                    field.textProperty().setValue(oldValue);
                 }
                 else if(!newValue.equals("")) {
                     canvasManager.setPolygonSides(Integer.parseInt(newValue));
@@ -293,14 +306,13 @@ public class MainController extends BaseController {
             canvasManager.setToolMode(null);
     }
 
-    /**
-     * Runs when a font is selected from the ComboBox (drop down)
-     */
     @FXML
-    public void handleFontChooser() {
-        if(fontSizeField.getText().equals(""))
-            return;
-        canvasManager.setTextFont(new Font(fontChooser.getValue(), Integer.parseInt(fontSizeField.getText())));
+    public void handleToggleSelect() {
+        tools.unToggleAllBut(toggleSelect);
+        if(toggleSelect.isSelected())
+            canvasManager.setToolMode(ToolMode.SELECT);
+        else
+            canvasManager.setToolMode(null);
     }
 
     /**
@@ -363,7 +375,6 @@ public class MainController extends BaseController {
             if(node instanceof ToggleButton)
                 tools.addToggles((ToggleButton)node);
         }
-        //tools.addToggles(toggleColorPicker, toggleDrawCircle, toggleDrawEllipse, toggleDrawLine, toggleDrawRectangle, toggleDrawSquare, togglePencil);
         canvasManager = new CanvasManager(canvas);
 
 
@@ -375,23 +386,9 @@ public class MainController extends BaseController {
             }
         });
 
+        fontChooser = new ComboBox<>();
         fontChooser.getItems().setAll(Font.getFamilies());
-
-        // Set up font size field
-        fontSizeField.textProperty().addListener((observable, oldValue, newValue) -> {
-            // Prevent non-numeric values from being entered
-            if(newValue.matches(".*\\D.*")) {
-                fontSizeField.textProperty().setValue(oldValue);
-            }
-            else if(!newValue.equals("")) {
-                canvasManager.setTextFont(new Font(fontChooser.getValue(), Integer.parseInt(fontSizeField.getText())));
-            }
-        });
-
-        // Set up text field
-        textField.textProperty().addListener((observable, oldValue, newValue) -> {
-            canvasManager.setDrawText(newValue);
-        });
+        fontChooser.setValue("Comic Sans MS");
     }
 
     /**

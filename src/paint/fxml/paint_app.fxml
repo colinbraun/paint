@@ -51,6 +51,7 @@
                 </VBox>
                 <VBox>
                     <ToggleButton fx:id="togglePolygon" text="Polygon" onAction="#handleTogglePolygon"/>
+                    <ToggleButton fx:id="toggleSelect" text="Select" onAction="#handleToggleSelect"/>
                 </VBox>
                 <VBox alignment="CENTER">
                     <Slider fx:id="lineWidthSlider" showTickLabels="true" showTickMarks="true" majorTickUnit="2" minorTickCount="1" value="1" min="0" max="10" prefWidth="300"/>
@@ -60,13 +61,6 @@
                     <Label text="Zoom:"/>
                     <TextField fx:id="zoomField" text="100" onAction="#handleZoomField"/>
                 </VBox>
-            </HBox>
-            <HBox fx:id="toolBarRow2" GridPane.rowIndex="2" GridPane.columnIndex="0">
-                <ComboBox fx:id="fontChooser" promptText="Font Family" onAction="#handleFontChooser"/>
-                <Label text="Font size: "/>
-                <TextField fx:id="fontSizeField" text="12"/>
-                <Label text="Text: "/>
-                <TextField fx:id="textField"/>
             </HBox>
         </GridPane>
     </top>

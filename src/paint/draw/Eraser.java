@@ -11,10 +11,10 @@ public class Eraser extends FreeDraw {
     }
 
     @Override
-    public void draw(GraphicsContext context) {
+    public void drawFinal(GraphicsContext context) {
         Paint original = context.getStroke();
         context.setStroke(Color.WHITE);
-        super.draw(context);
+        super.drawFinal(context);
         context.setStroke(original);
     }
 }

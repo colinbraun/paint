@@ -13,7 +13,7 @@ public class Text extends Drawable {
     }
 
     @Override
-    public void draw(GraphicsContext context) {
+    public void drawFinal(GraphicsContext context) {
         context.fillText(text, x1, y1);
     }
 }

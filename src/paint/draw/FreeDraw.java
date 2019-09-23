@@ -31,7 +31,7 @@ public class FreeDraw extends Drawable {
     }
 
     @Override
-    public void draw(GraphicsContext context) {
+    public void drawFinal(GraphicsContext context) {
         for(int i = 1; i < path.size(); i++) {
             Point2D from = path.get(i-1);
             Point2D to = path.get(i);

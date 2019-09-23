@@ -29,5 +29,9 @@ public abstract class Drawable {
      * Method that when called should draw the desired drawing given the context
      * @param context the context used to draw
      */
-    public abstract void draw(GraphicsContext context);
+    public abstract void drawFinal(GraphicsContext context);
+
+    public void drawPreview(GraphicsContext context) {
+        drawFinal(context);
+    }
 }

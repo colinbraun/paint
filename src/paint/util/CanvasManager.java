@@ -20,6 +20,7 @@ import paint.constant.ToolMode;
 import paint.constant.SaveChoice;
 import paint.controller.SavePopupController;
 import paint.draw.*;
+import paint.draw.special.Selection;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -81,6 +82,10 @@ public class CanvasManager {
      * The number of sides to draw the polygon with when the Polygon tool is selected
      */
     private int polygonSides;
+    /**
+     * A selection
+     */
+    private Selection selection;
 
     public CanvasManager(@NotNull Canvas canvas) {
         undoStack = new Stack<>();
@@ -131,6 +136,9 @@ public class CanvasManager {
                 case POLYGON:
                     currentDrawing = new Polygon(event.getX(), event.getY(), polygonSides);
                     break;
+                case SELECT:
+                    // Do select things
+                    break;
                 case COLOR_PICKER:
                     Color color = redrawImage.getPixelReader().getColor((int)event.getX(), (int)event.getY());
                     Main.mainController.getColorPicker().setValue(color);
@@ -144,12 +152,19 @@ public class CanvasManager {
         canvas.addEventHandler(MouseEvent.MOUSE_DRAGGED, event -> {
             if(toolMode == null || toolMode == ToolMode.COLOR_PICKER)
                 return;
+            // For non {@link Drawable} cases
+            switch(toolMode) {
+                case COLOR_PICKER:
+                    return;
+                case SELECT:
+                    break;
+            }
 
             // This will work for your TYPICAL Drawables. It may happen that something special need be done.
             // In which case, might need a switch here
             redraw();
             currentDrawing.setEnd(event.getX(), event.getY());
-            currentDrawing.draw(context);
+            currentDrawing.drawFinal(context);
             changeMadeNotSaved = true;
     });
 
@@ -163,7 +178,7 @@ public class CanvasManager {
             undoStack.add(redrawImage);
             redraw();
             currentDrawing.setEnd(event.getX(), event.getY());
-            currentDrawing.draw(context);
+            currentDrawing.drawFinal(context);
             redrawImage = canvas.snapshot(null, null);
             changeMadeNotSaved = true;
         });

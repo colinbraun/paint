@@ -21,7 +21,7 @@ public class Polygon extends Drawable {
     }
 
     @Override
-    public void draw(GraphicsContext context) {
+    public void drawFinal(GraphicsContext context) {
         double deltaDegrees = 360.0 / n;
         double startingDegrees = -90.0;
         if(n % 2 == 0)

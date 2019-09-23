@@ -21,7 +21,7 @@ public class Line extends Drawable {
     }
 
     @Override
-    public void draw(GraphicsContext context) {
+    public void drawFinal(GraphicsContext context) {
         context.strokeLine(x0, y0, x1, y1);
     }
 }
