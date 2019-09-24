@@ -13,11 +13,11 @@ public class Main extends Application {
     /**
      * The initial width of the scene
      */
-    public static final int WIDTH = 800;
+    public static final int WIDTH = 900;
     /**
      * The initial height of the scene
      */
-    public static final int HEIGHT = 600;
+    public static final int HEIGHT = 700;
     /**
      * The minimum width of the stage
      */

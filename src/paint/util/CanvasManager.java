@@ -152,7 +152,7 @@ public class CanvasManager {
         canvas.addEventHandler(MouseEvent.MOUSE_DRAGGED, event -> {
             if(toolMode == null || toolMode == ToolMode.COLOR_PICKER)
                 return;
-            // For non {@link Drawable} cases
+            // For special cases cases
             switch(toolMode) {
                 case COLOR_PICKER:
                     return;
