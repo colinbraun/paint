@@ -333,7 +333,7 @@ public class MainController extends BaseController {
         stage.setScene(scene);
         stage.setTitle("Resize Canvas");
         stage.setResizable(false);
-        stage.show();
+        stage.showAndWait();
     }
 
     /**

@@ -6,6 +6,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.PixelReader;
 import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import paint.Main;
 import paint.util.CanvasManager;
 
@@ -44,10 +46,15 @@ public class ResizeController extends BaseController {
             int oldY = (int)Math.round((double)newY / newHeight * oldHeight);
             for(int newX = 0; newX < newWidth; newX++) {
                 int oldX = (int)Math.round((double)newX / newWidth * oldWidth);
+                if(oldX >= oldWidth)
+                    oldX--;
+                if(oldY >= oldHeight)
+                    oldY--;
                 pixelWriter.setArgb(newX, newY, pixelReader.getArgb(oldX, oldY));
             }
         }
         canvasManager.loadImage(newImage);
+        ((Stage)horizontalField.getScene().getWindow()).close();
     }
 
     private int getTextFieldValue(TextField field) {

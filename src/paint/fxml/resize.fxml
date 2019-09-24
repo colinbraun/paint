@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 
 <?import com.sun.javafx.scene.control.skin.IntegerField?>
-<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="paint.controller.ResizeController" prefHeight="400.0" prefWidth="250.0">
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="paint.controller.ResizeController" prefHeight="400.0" prefWidth="250.0" fx:id="root">
     <center>
         <VBox>
             <HBox alignment="CENTER">
