@@ -31,7 +31,29 @@ public abstract class Drawable {
      */
     public abstract void drawFinal(GraphicsContext context);
 
+    /**
+     * Allows children class to overload and draw a preview (i.e. what it looks like as it's being dragged)
+     * If this the sub-class does not override this, drawFinal is called instead.
+     * Note that this might not be necessary to create a preview.
+     * @param context the context used to draw
+     */
     public void drawPreview(GraphicsContext context) {
         drawFinal(context);
+    }
+
+    public double getXTopLeft() {
+        return Math.min(x0, x1);
+    }
+
+    public double getYTopLeft() {
+        return Math.min(y0, y1);
+    }
+
+    public double getWidth() {
+        return Math.abs(x1-x0);
+    }
+
+    public double getHeight() {
+        return Math.abs(y1-y0);
     }
 }

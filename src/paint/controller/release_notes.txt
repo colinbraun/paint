@@ -1,0 +1,29 @@
+Paint v1.0 - Release Notse:
+* Added a menu bar
+* Added ability to view image from file
+* Added ability to save the opened file
+* Added the ability for the user to choose which file to view
+
+Paint v1.1 - Release Notes:
+
+* Added save as
+* Added ability to draw a line
+* Canvas now properly resizes to fit image being opened
+* When image is too big for window, scroll bars will pop up to allow full image viewing
+* Added ability to control width of line
+* Added a color chooser for drawings
+* Added an about menu to see details about the software
+
+Paint v1.2 - Release Notes:
+* Added ability to free draw
+* Added ability to draw squares
+* Added ability to draw rectangles
+* Added ability to draw circles
+* Added ability to draw rectangles
+* Added smart save feature (when opening a new file or closing the window with unsaved work)
+* Added ability to resize canvas
+* Added ability to zoom in/out
+* Added undo
+* Added redo
+* Added color dropper
+* Added support for more file types (now bmp, png, and jpg)

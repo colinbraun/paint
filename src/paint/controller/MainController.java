@@ -78,8 +78,6 @@ public class MainController extends BaseController {
      * Control for font when drawing text
      */
     @FXML private ComboBox<String> fontChooser;
-    @FXML private TextField fontSizeField;
-    @FXML private TextField textField;
     /**
      * Slider that controls the width of drawn lines/shapes
      */
@@ -309,8 +307,10 @@ public class MainController extends BaseController {
     @FXML
     public void handleToggleSelect() {
         tools.unToggleAllBut(toggleSelect);
-        if(toggleSelect.isSelected())
+        if(toggleSelect.isSelected()) {
             canvasManager.setToolMode(ToolMode.SELECT);
+            canvasManager.setSelectionMade(false);
+        }
         else
             canvasManager.setToolMode(null);
     }

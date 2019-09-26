@@ -3,11 +3,14 @@ package paint.util;
 import com.sun.istack.internal.NotNull;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
@@ -83,9 +86,13 @@ public class CanvasManager {
      */
     private int polygonSides;
     /**
-     * A selection
+     * Whether or not a selection has been made yet (is it time to move it?)
      */
-    private Selection selection;
+    private boolean selectionMade;
+    /**
+     * A copy of what the canvas looks like right before a selection is made (for the sake of undoing)
+     */
+    private Image preSelectImage;
 
     public CanvasManager(@NotNull Canvas canvas) {
         undoStack = new Stack<>();
@@ -107,7 +114,9 @@ public class CanvasManager {
             if(toolMode == null)
                 return;
 
-            redrawImage = canvas.snapshot(null, null);
+            if(!selectionMade)
+                redrawImage = canvas.snapshot(null, null);
+
             switch(toolMode) {
                 case LINE:
                     currentDrawing = new Line(event.getX(), event.getY());
@@ -137,7 +146,33 @@ public class CanvasManager {
                     currentDrawing = new Polygon(event.getX(), event.getY(), polygonSides);
                     break;
                 case SELECT:
-                    // Do select things
+                    if(!selectionMade) {
+                        preSelectImage = canvas.snapshot(null, null);
+                        currentDrawing = new Selection(event.getX(), event.getY());
+                    }
+                    else {
+                        Selection selection = (Selection)currentDrawing;
+                        if(selection.isInSelection(event.getX(), event.getY())) {
+                            selection.setGrabbed(true);
+                            selection.setMouseX(event.getX());
+                            selection.setMouseY(event.getY());
+                            selection.setGrabbedX(event.getX());
+                            selection.setGrabbedY(event.getY());
+
+                            PixelWriter pixelWriter = ((WritableImage)redrawImage).getPixelWriter();
+                            for(int i = (int)selection.getXTopLeft(); i < (int)(selection.getXTopLeft()+selection.getWidth()); i++) {
+                                for(int j = (int)selection.getYTopLeft(); j < (int)(selection.getYTopLeft()+selection.getHeight()); j++) {
+                                    pixelWriter.setArgb(i, j, 0xFFFFFFFF);
+                                }
+                            }
+                            redraw();
+                            selection.drawPreview(context);
+                        }
+                        else {
+                            selectionMade = false;
+                            currentDrawing = new Selection(event.getX(), event.getY());
+                        }
+                    }
                     break;
                 case COLOR_PICKER:
                     Color color = redrawImage.getPixelReader().getColor((int)event.getX(), (int)event.getY());
@@ -150,31 +185,70 @@ public class CanvasManager {
 
         //Handle mouse dragged event (button held down and moved)
         canvas.addEventHandler(MouseEvent.MOUSE_DRAGGED, event -> {
-            if(toolMode == null || toolMode == ToolMode.COLOR_PICKER)
+            if(toolMode == null)
                 return;
-            // For special cases cases
+            // For special cases
             switch(toolMode) {
                 case COLOR_PICKER:
                     return;
                 case SELECT:
-                    break;
+                    Selection selection = (Selection)currentDrawing;
+                    if(!selectionMade) {
+                        selection.setEnd(event.getX(), event.getY());
+                        redraw();
+                        selection.drawPreview(context);
+                        return;
+                    }
+                    else if(selection.isGrabbed()) {
+                        selection.setMouseX(event.getX());
+                        selection.setMouseY(event.getY());
+                        redraw();
+                        selection.drawPreview(context);
+                    }
+                    return;
             }
 
             // This will work for your TYPICAL Drawables. It may happen that something special need be done.
-            // In which case, might need a switch here
             redraw();
             currentDrawing.setEnd(event.getX(), event.getY());
-            currentDrawing.drawFinal(context);
-            changeMadeNotSaved = true;
+            currentDrawing.drawPreview(context);
+            //changeMadeNotSaved = true;
     });
 
         //Handle mouse released event
         canvas.addEventHandler(MouseEvent.MOUSE_RELEASED, event -> {
-            if(toolMode == null || toolMode == ToolMode.COLOR_PICKER)
+            if(toolMode == null)
                 return;
+            // For special cases
+            switch(toolMode) {
+                case COLOR_PICKER:
+                    return;
+                case SELECT:
+                    Selection selection = (Selection)currentDrawing;
+                    if(!selectionMade) {
+                        redraw();
+                        selectionMade = true;
+                        selection.setEnd(event.getX(), event.getY());
+                        SnapshotParameters params = new SnapshotParameters();
+                        params.setViewport(new Rectangle2D(selection.getXTopLeft(), selection.getYTopLeft(), selection.getWidth(), selection.getHeight()));
+                        selection.setSelection(canvas.snapshot(params, null));
+                        selection.drawPreview(context);
+                        return;
+                    }
+                    else if(selection.isGrabbed()) {
+                        // This is not working properly
+                        undoStack.add(preSelectImage);
+                        redraw();
+                        selection.drawFinal(context);
+                        selection.setGrabbed(false);
+                        redrawImage = canvas.snapshot(null, null);
+                        selectionMade = false;
+                        return;
+                    }
+                    break;
+            }
 
             // This will work for your TYPICAL Drawables. It may happen that something special need be done.
-            // In which case, might need a switch here
             undoStack.add(redrawImage);
             redraw();
             currentDrawing.setEnd(event.getX(), event.getY());
@@ -231,6 +305,10 @@ public class CanvasManager {
 
     public void setPolygonSides(int sides) {
         polygonSides = sides;
+    }
+
+    public void setSelectionMade(boolean selectionMade) {
+        this.selectionMade = selectionMade;
     }
 
     /**
@@ -357,5 +435,19 @@ public class CanvasManager {
         stage.showAndWait();
         context.beginPath();
         return controller.getChoice();
+    }
+
+    /**
+     * For internal testing only. Takes an image (intended to be from a snapshot) and sends it to a file for viewing
+     * @param image
+     */
+    private void sendSnapShotToNewFile(Image image) {
+        BufferedImage bufferedImage = SwingFXUtils.fromFXImage(image, null);
+        File file = new File("test.png");
+        try {
+            ImageIO.write(bufferedImage, "png", file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
