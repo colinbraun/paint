@@ -32,26 +32,25 @@
                 <VBox>
                     <ColorPicker fx:id="colorPicker" onAction="#handleColorPicker"/>
                     <ToggleButton fx:id="toggleColorPicker" text="Dropper" onAction="#handleToggleColorPicker"/>
+                    <ToggleButton fx:id="toggleSelect" text="Select" onAction="#handleToggleSelect"/>
                 </VBox>
                 <VBox>
                     <ToggleButton fx:id="togglePencil" text="Pencil" onAction="#handleTogglePencil"/>
                     <ToggleButton fx:id="toggleDrawLine" text="Line" onAction="#handleToggleDrawLine"/>
+                    <ToggleButton fx:id="toggleEraser" text="Eraser" onAction="#handleToggleEraser"/>
                 </VBox>
                 <VBox>
                     <ToggleButton fx:id="toggleDrawCircle" text="Circle" onAction="#handleToggleDrawCircle"/>
                     <ToggleButton fx:id="toggleDrawEllipse" text="Ellipse" onAction="#handleToggleDrawEllipse"/>
+                    <ToggleButton fx:id="toggleText" text="Text" onAction="#handleToggleText"/>
                 </VBox>
                 <VBox>
                     <ToggleButton fx:id="toggleDrawSquare" text="Square" onAction="#handleToggleDrawSquare"/>
                     <ToggleButton fx:id="toggleDrawRectangle" text="Rectangle" onAction="#handleToggleDrawRectangle"/>
-                </VBox>
-                <VBox>
-                    <ToggleButton fx:id="toggleText" text="Text" onAction="#handleToggleText"/>
-                    <ToggleButton fx:id="toggleEraser" text="Eraser" onAction="#handleToggleEraser"/>
-                </VBox>
-                <VBox>
                     <ToggleButton fx:id="togglePolygon" text="Polygon" onAction="#handleTogglePolygon"/>
-                    <ToggleButton fx:id="toggleSelect" text="Select" onAction="#handleToggleSelect"/>
+                </VBox>
+                <VBox>
+                    <ToggleButton fx:id="toggleDrawTriangle" text="Triangle" onAction="#handleToggleDrawTriangle"/>
                 </VBox>
                 <VBox alignment="CENTER">
                     <Slider fx:id="lineWidthSlider" showTickLabels="true" showTickMarks="true" majorTickUnit="2" minorTickCount="1" value="1" min="0" max="10" prefWidth="300"/>

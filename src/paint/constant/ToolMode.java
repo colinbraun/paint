@@ -9,6 +9,7 @@ public enum ToolMode {
     CIRCLE(),
     RECTANGLE(),
     SQUARE(),
+    TRIANGLE(),
     PENCIL(),
     TEXT(),
     POLYGON(),

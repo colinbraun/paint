@@ -133,6 +133,9 @@ public class CanvasManager {
                 case SQUARE:
                     currentDrawing = new Square(event.getX(), event.getY());
                     break;
+                case TRIANGLE:
+                    currentDrawing = new Triangle(event.getX(), event.getY());
+                    break;
                 case PENCIL:
                     currentDrawing = new FreeDraw(event.getX(), event.getY());
                     break;

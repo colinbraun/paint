@@ -68,6 +68,7 @@ public class MainController extends BaseController {
     @FXML private ToggleButton toggleEraser;
     @FXML private ToggleButton togglePolygon;
     @FXML private ToggleButton toggleSelect;
+    @FXML private ToggleButton toggleDrawTriangle;
     private ToggleGroup tools;
     @FXML private HBox toolBarRow1;
     /**
@@ -310,6 +311,16 @@ public class MainController extends BaseController {
         if(toggleSelect.isSelected()) {
             canvasManager.setToolMode(ToolMode.SELECT);
             canvasManager.setSelectionMade(false);
+        }
+        else
+            canvasManager.setToolMode(null);
+    }
+
+    @FXML
+    public void handleToggleDrawTriangle() {
+        tools.unToggleAllBut(toggleDrawTriangle);
+        if(toggleDrawTriangle.isSelected()) {
+            canvasManager.setToolMode(ToolMode.TRIANGLE);
         }
         else
             canvasManager.setToolMode(null);

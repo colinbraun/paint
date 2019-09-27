@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 
 <?import javafx.scene.text.Text?>
-<BorderPane prefHeight="300.0" prefWidth="300.0" fx:controller="paint.controller.AboutController" xmlns:fx="http://javafx.com/fxml">
+<BorderPane prefHeight="400.0" prefWidth="600.0" fx:controller="paint.controller.AboutController" xmlns:fx="http://javafx.com/fxml">
     <center>
         <ScrollPane>
             <VBox fx:id="content">

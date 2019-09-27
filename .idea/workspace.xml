@@ -3,16 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Paint-CS250/paint/controller/MainController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Paint-CS250/paint/controller/MainController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Paint-CS250/paint/draw/Drawable.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Paint-CS250/paint/draw/Drawable.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Paint-CS250/paint/draw/special/Selection.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Paint-CS250/paint/draw/special/Selection.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Paint-CS250/paint/fxml/help.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Paint-CS250/paint/fxml/help.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Paint-CS250/paint/util/CanvasManager$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Paint-CS250/paint/util/CanvasManager$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Paint-CS250/paint/util/CanvasManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Paint-CS250/paint/util/CanvasManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/paint/constant/ToolMode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/paint/constant/ToolMode.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/paint/controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/paint/controller/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/paint/draw/Drawable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/paint/draw/Drawable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/paint/draw/special/Selection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/paint/draw/special/Selection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/paint/controller/release_notes.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/paint/controller/release_notes.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/paint/fxml/help.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/paint/fxml/help.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/paint/fxml/paint_app.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/paint/fxml/paint_app.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/paint/util/CanvasManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/paint/util/CanvasManager.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
