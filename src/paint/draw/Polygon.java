@@ -3,10 +3,13 @@ package paint.draw;
 import javafx.scene.canvas.GraphicsContext;
 
 /**
- * A generic polygon with N sides
+ * A generic regular polygon with N sides
  */
 public class Polygon extends Drawable {
 
+    /**
+     * The number of sides the polygon will have
+     */
     private int n;
 
     /**
@@ -20,6 +23,10 @@ public class Polygon extends Drawable {
         this.n = n;
     }
 
+    /**
+     * Draw the regular polygon
+     * @param context the context used to draw
+     */
     @Override
     public void drawFinal(GraphicsContext context) {
         double deltaDegrees = 360.0 / n;

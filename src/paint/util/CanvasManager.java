@@ -23,7 +23,7 @@ import paint.constant.ToolMode;
 import paint.constant.SaveChoice;
 import paint.controller.SavePopupController;
 import paint.draw.*;
-import paint.draw.special.Selection;
+import paint.draw.Selection;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -442,7 +442,7 @@ public class CanvasManager {
 
     /**
      * For internal testing only. Takes an image (intended to be from a snapshot) and sends it to a file for viewing
-     * @param image
+     * @param image the image to send to a file
      */
     private void sendSnapShotToNewFile(Image image) {
         BufferedImage bufferedImage = SwingFXUtils.fromFXImage(image, null);
