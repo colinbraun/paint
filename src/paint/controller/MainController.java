@@ -1,5 +1,6 @@
 package paint.controller;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -26,6 +27,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class MainController extends BaseController {
 
@@ -84,6 +88,10 @@ public class MainController extends BaseController {
      */
     @FXML private Slider lineWidthSlider;
     @FXML private Label lineWidthLabel;
+    @FXML private Label autoSaveTimer;
+    @FXML private CheckMenuItem autoSaverMenuOption;
+
+    private ScheduledExecutorService autoSaver;
     public MainController() {
         tools = new ToggleGroup();
         Main.mainController = this;
@@ -371,6 +379,15 @@ public class MainController extends BaseController {
         canvasManager.setZoom(Integer.parseInt(zoomField.textProperty().getValue()));
     }
 
+    @FXML
+    public void handleAutoSaver() {
+        if(autoSaverMenuOption.isSelected()) {
+            autoSaveTimer.setVisible(true);
+        }
+        else
+            autoSaveTimer.setVisible(false);
+    }
+
     // This will run AFTER all the component fields have been initialized, unlike the constructor
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -400,13 +417,30 @@ public class MainController extends BaseController {
         fontChooser = new ComboBox<>();
         fontChooser.getItems().setAll(Font.getFamilies());
         fontChooser.setValue("Comic Sans MS");
+
+        Thread thread = new Thread(() -> {
+            while(true) {
+                try {
+                    for(int i = 10; i > 0; i--) {
+                        int k = i;
+                        Platform.runLater(() -> autoSaveTimer.setText("Auto-save: " + k));
+                        Thread.sleep(1000);
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                Platform.runLater(() -> canvasManager.sendSnapShotToNewFile(canvas.snapshot(null, null)));
+            }
+        });
+        thread.setDaemon(true);
+        thread.start();
     }
 
     /**
      * Find all of the non-pane children of the given pane
      * @param pane the pane to find the children of
      * @param <T> W.I.P. Intended to find a specific type of child. Currently only returns a list of {@link Node}
-     * @return
+     * @return a list of the leaf nodes in a pane
      */
     public static <T extends Node> List<T> findRootChildrenInPane(Pane pane) {
         List<T> list = new ArrayList<>();

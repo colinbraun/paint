@@ -1,7 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="" />
+    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Paint-CS250.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Paint-CS250.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Paint-CS250/paint/draw/Polygon.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Paint-CS250/paint/draw/Polygon.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Paint-CS250/paint/draw/special/Selection.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Paint-CS250/paint/util/CanvasManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Paint-CS250/paint/util/CanvasManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/paint/controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/paint/controller/MainController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/paint/draw/Selection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/paint/draw/Selection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/paint/fxml/help.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/paint/fxml/help.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/paint/fxml/paint_app.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/paint/fxml/paint_app.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/paint/util/CanvasManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/paint/util/CanvasManager.java" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,6 +72,7 @@
         <option value="Enum" />
         <option value="FxmlFile" />
         <option value="Class" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
@@ -79,6 +91,7 @@
     <option name="STATE" value="0" />
   </component>
   <component name="PropertiesComponent">
+    <property name="Downloaded.Files.Path.Enabled" value="false" />
     <property name="GoToClass.includeLibraries" value="false" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="GoToFile.includeJavaFiles" value="false" />
@@ -86,22 +99,37 @@
     <property name="MemberChooser.showClasses" value="true" />
     <property name="MemberChooser.sorted" value="false" />
     <property name="OverrideImplement.combined" value="false" />
+    <property name="Repository.Attach.Annotations" value="false" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
+    <property name="create.test.in.the.same.root" value="true" />
     <property name="dynamic.classpath" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="SDKs" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.2" />
     <property name="recentsLimit" value="5" />
     <property name="settings.editor.selected.configurable" value="terminal" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\User\Desktop\CS250\Paint-CS250\src\main\java\sample" />
-      <recent name="C:\Users\User\Desktop\CS250\Paint-CS250\src\main\resources" />
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="test" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\User\Desktop\CS250\paint\src\paint\controller" />
       <recent name="C:\Users\User\Desktop\CS250\Paint-CS250\src" />
       <recent name="C:\Users\User\Desktop\CS250\Paint-CS250\src\main\java\sample\fxml" />
       <recent name="C:\Users\User\Desktop\CS250\Paint-CS250\src\main\java" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\User\Desktop\CS250\Paint-CS250\src\main\java\sample" />
+      <recent name="C:\Users\User\Desktop\CS250\Paint-CS250\src\main\resources" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -116,7 +144,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.Main">
     <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
       <option name="VMOptions" />
       <option name="arguments" />
@@ -157,6 +185,25 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="PaintTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Paint-CS250" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="test" />
+      <option name="MAIN_CLASS_NAME" value="test.PaintTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <option name="TEST_OBJECT" value="class" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
@@ -188,6 +235,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.PaintTest" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />

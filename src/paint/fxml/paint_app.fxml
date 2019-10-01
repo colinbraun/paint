@@ -24,6 +24,9 @@
                     <MenuItem text="Redo" onAction="#handleRedo" accelerator="Shortcut+Y"/>
                     <MenuItem text="Resize" onAction="#handleResize" accelerator="Shortcut+R"/>
                 </Menu>
+                <Menu text="View">
+                    <CheckMenuItem fx:id="autoSaverMenuOption" text="Auto-Saver Visible" selected="true" onAction="#handleAutoSaver"/>
+                </Menu>
                 <Menu text="Help">
                     <MenuItem text="About" onAction="#handleAbout"/>
                 </Menu>
@@ -72,4 +75,9 @@
             </Group>
         </ScrollPane>
     </center>
+    <bottom>
+        <HBox alignment="CENTER_RIGHT">
+            <Label fx:id="autoSaveTimer"/>
+        </HBox>
+    </bottom>
 </BorderPane>

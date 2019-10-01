@@ -441,10 +441,10 @@ public class CanvasManager {
     }
 
     /**
-     * For internal testing only. Takes an image (intended to be from a snapshot) and sends it to a file for viewing
+     * Takes an image (intended to be from a snapshot) and sends it to a file
      * @param image the image to send to a file
      */
-    private void sendSnapShotToNewFile(Image image) {
+    public void sendSnapShotToNewFile(Image image) {
         BufferedImage bufferedImage = SwingFXUtils.fromFXImage(image, null);
         File file = new File("test.png");
         try {

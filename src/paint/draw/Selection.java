@@ -4,12 +4,20 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
-import paint.draw.Drawable;
 
 public class Selection extends Drawable {
 
+    /**
+     * The current selection
+     */
     private Image selection;
+    /**
+     * Whether or not the selection has been grabbed (with the mouse)
+     */
     private boolean isGrabbed;
+    /**
+     * Info used to determine where to place the image on the canvas while it's dragged
+     */
     private double grabbedDeltaX, grabbedDeltaY, mouseX, mouseY;
 
     public Selection(double x0, double y0) {
@@ -17,10 +25,18 @@ public class Selection extends Drawable {
         isGrabbed = false;
     }
 
+    /**
+     * Set the image that is selected.
+     * @param image the selected image
+     */
     public void setSelection(Image image) {
         this.selection = image;
     }
 
+    /**
+     * Draw just the image (assuming it's grabbed, like it should be).
+     * @param context the context used to draw
+     */
     @Override
     public void drawFinal(GraphicsContext context) {
         if(isGrabbed) {
@@ -28,6 +44,11 @@ public class Selection extends Drawable {
         }
     }
 
+    /**
+     * Draw the border around the current selection (so you can see what's being selected).
+     * If it's grabbed, also draw the image based on the mouse's position and where the image was grabbed.
+     * @param context the context used to draw
+     */
     @Override
     public void drawPreview(GraphicsContext context) {
         double originalWidth = context.getLineWidth();
@@ -45,6 +66,12 @@ public class Selection extends Drawable {
         context.setStroke(originalColor);
     }
 
+    /**
+     * Check if the point x, y is within the made selection
+     * @param x the x-coordinate
+     * @param y the y-coordinate
+     * @return whether or not (x,y) is in the selection
+     */
     public boolean isInSelection(double x, double y) {
         boolean xPositive = x1 - x0 >= 0;
         boolean yPositive = y1 - y0 >= 0;
@@ -56,10 +83,18 @@ public class Selection extends Drawable {
         return x >= x0Temp && x <= x1Temp && y >= y0Temp && y <= y1Temp;
     }
 
+    /**
+     * Whether or not the selection is grabbed
+     * @return
+     */
     public boolean isGrabbed() {
         return isGrabbed;
     }
 
+    /**
+     * Set whether or not the selection is grabbed
+     * @param grabbed is the selection grabbed?
+     */
     public void setGrabbed(boolean grabbed) {
         isGrabbed = grabbed;
     }
