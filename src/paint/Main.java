@@ -30,6 +30,7 @@ public class Main extends Application {
      * A reference to the main controller currently in use.
      */
     public static MainController mainController;
+    public static Stage mainStage;
 
     public static void main(String[] args) {
         launch(args);
@@ -52,6 +53,7 @@ public class Main extends Application {
                     event.consume();
             }
         });
+        mainStage = stage;
         stage.show();
     }
 }

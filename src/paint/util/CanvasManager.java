@@ -12,6 +12,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
+import javafx.scene.image.WritablePixelFormat;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
@@ -21,6 +22,7 @@ import javafx.stage.Stage;
 import paint.Main;
 import paint.constant.ToolMode;
 import paint.constant.SaveChoice;
+import paint.controller.LossyFilePopupController;
 import paint.controller.SavePopupController;
 import paint.draw.*;
 import paint.draw.Selection;
@@ -405,12 +407,35 @@ public class CanvasManager {
      */
     public void saveCanvasToFile(@NotNull File file) {
         WritableImage image = canvas.snapshot(null, null);
-        BufferedImage bufferedImage = SwingFXUtils.fromFXImage(image, null);
+        // Tried this approach, but this doesn't work. Had to make my own BufferedImage
+        //BufferedImage bufferedImage = SwingFXUtils.fromFXImage(image, null);
+        int w = (int)image.getWidth();
+        int h = (int)image.getHeight();
+        int[] buffer = new int[w*h];
+        BufferedImage newImage = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
+        image.getPixelReader().getPixels(0, 0, w, h, WritablePixelFormat.getIntArgbInstance(), buffer, 0, w);
+        newImage.setRGB(0, 0, w, h, buffer, 0, w);
         try {
-            ImageIO.write(bufferedImage, "png", file);
+            System.out.println("Extension: " + getFileExtension(file));
+            // If opened file is same as this one, ignore loss of data problem
+            if(openedFile != null && openedFile == file)
+                System.out.println(ImageIO.write(newImage, getFileExtension(file), file));
+            // Else if it's jpg (can add other types if needed), warn user before saving
+            else if(getFileExtension(file).equals("jpg")) {
+                if(showLossyPopup() == 1)
+                    System.out.println(ImageIO.write(newImage, getFileExtension(file), file));
+                else
+                    return;
+            }
+            // Else it's a new file that isn't of lossy format, save with no prompt
+            else {
+                System.out.println(ImageIO.write(newImage, getFileExtension(file), file));
+            }
+
         } catch (IOException e) {
             e.printStackTrace();
         }
+        openedFile = file;
         changeMadeNotSaved = false;
     }
 
@@ -424,7 +449,7 @@ public class CanvasManager {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/paint/fxml/save_popup.fxml"));
         Parent root = null;
         try {
-            root = (Parent)loader.load();
+            root = loader.load();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -436,7 +461,26 @@ public class CanvasManager {
         stage.setResizable(false);
         controller.setStage(stage);
         stage.showAndWait();
-        context.beginPath();
+        return controller.getChoice();
+    }
+
+    public int showLossyPopup() {
+        System.out.println("Showing popup");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/paint/fxml/lossy_file_popup.fxml"));
+        Parent root = null;
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        LossyFilePopupController controller = (LossyFilePopupController)loader.getController();
+        Stage stage = new Stage();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.setTitle("Save");
+        stage.setResizable(false);
+        controller.setStage(stage);
+        stage.showAndWait();
         return controller.getChoice();
     }
 
@@ -452,5 +496,13 @@ public class CanvasManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private static String getFileExtension(File file) {
+        int index = file.getName().lastIndexOf('.');
+        if(index > 0 && index < file.getName().length())
+            return file.getName().substring(index + 1);
+        System.out.println("Could not find file extension");
+        return "";
     }
 }

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.text.Text?>
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="paint.controller.LossyFilePopupController" prefHeight="200.0" prefWidth="600.0">
+    <center>
+        <VBox alignment="CENTER">
+            <HBox alignment="CENTER">
+                <Text>The file type you have chosen is not a lossless format, and may lose some information. Save to this format anyway?</Text>
+            </HBox>
+            <HBox alignment="CENTER">
+                <Button onAction="#handleYes">Yes</Button>
+                <Button onAction="#handleNo">No</Button>
+            </HBox>
+        </VBox>
+    </center>
+</BorderPane>
