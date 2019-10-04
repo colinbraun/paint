@@ -37,6 +37,7 @@ import java.util.Stack;
 
 /**
  * A utility class intended to make working with the canvas easier
+ * @author Colin Braun
  */
 public class CanvasManager {
     /**
@@ -283,6 +284,10 @@ public class CanvasManager {
         this.toolMode = mode;
     }
 
+    public ToolMode getToolMode() {
+        return toolMode;
+    }
+
     /**
      * Set the width of the line being drawn
      * @param width the chosen line width
@@ -298,6 +303,10 @@ public class CanvasManager {
         this.selectedColor = color;
         context.setFill(color);
         context.setStroke(color);
+    }
+
+    public Paint getSelectedColor() {
+        return selectedColor;
     }
 
     public void setTextFont(Font font) {
@@ -464,6 +473,10 @@ public class CanvasManager {
         return controller.getChoice();
     }
 
+    /**
+     * Show the lossy popup and wait for a response
+     * @return 1 if Yes was selected, 0 if No was selected
+     */
     public int showLossyPopup() {
         System.out.println("Showing popup");
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/paint/fxml/lossy_file_popup.fxml"));
@@ -498,6 +511,11 @@ public class CanvasManager {
         }
     }
 
+    /**
+     * Helper method to find a file's extension
+     * @param file the file whose extension will be found
+     * @return the file's extension as a {@link String}
+     */
     private static String getFileExtension(File file) {
         int index = file.getName().lastIndexOf('.');
         if(index > 0 && index < file.getName().length())

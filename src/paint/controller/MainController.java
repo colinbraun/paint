@@ -31,6 +31,10 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * The Controller for the main window
+ * @author Colin Braun
+ */
 public class MainController extends BaseController {
 
     /**
