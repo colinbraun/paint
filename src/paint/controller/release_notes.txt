@@ -1,4 +1,9 @@
 
+Paint v1.4 - Release Notes:
+* Implemented an auto-save feature
+* Added ability to turn off/on the auto-save timer visibility
+* Added ability to save to an alternative format than the one of the original file
+
 Paint v1.3 - Release Notes:
 * Added ability to select and move chunks
 * Added ability to draw triangles
