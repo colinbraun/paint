@@ -12,7 +12,6 @@
       <change beforePath="$PROJECT_DIR$/src/paint/fxml/paint_app.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/paint/fxml/paint_app.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/paint/util/CanvasManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/paint/util/CanvasManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test.png" beforeDir="false" afterPath="$PROJECT_DIR$/test.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/paint/MainTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/paint/MainTest.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

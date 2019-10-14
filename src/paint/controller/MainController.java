@@ -403,6 +403,11 @@ public class MainController extends BaseController {
             autoSaveTimer.setVisible(false);
     }
 
+    @FXML
+    public void handleInvert() {
+        canvasManager.invert();
+    }
+
     // This will run AFTER all the component fields have been initialized, unlike the constructor
     @Override
     public void initialize(URL location, ResourceBundle resources) {

@@ -9,10 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
-import javafx.scene.image.PixelWriter;
-import javafx.scene.image.WritableImage;
-import javafx.scene.image.WritablePixelFormat;
+import javafx.scene.image.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
@@ -292,6 +289,41 @@ public class CanvasManager {
     }
 
     /**
+     * Invert the redrawImage (resulting in the canvas image being inverted)
+     */
+    public void invert() {
+        PixelWriter writer = ((WritableImage)redrawImage).getPixelWriter();
+        PixelReader reader = redrawImage.getPixelReader();
+
+        undoStack.add(canvas.snapshot(null, null));
+        for(int i = 0; i < redrawImage.getWidth(); i++) {
+            for(int j = 0; j < redrawImage.getHeight(); j++) {
+                int value = reader.getArgb(i, j);
+                //System.out.println("Value was: " + value);
+                int a = (value >> 24) & 0xFF;
+                int r = (value >> 16) & 0xFF;
+                int g = (value >> 8) & 0xFF;
+                int b = value & 0xFF;
+
+                //System.out.println("A: " + a + "R: " + r + "G: " + g + "B: " + b);
+                int newA = a;
+                int newR = 255 - r;
+                int newG = 255 - g;
+                int newB = 255 - b;
+                newA = newA << 24;
+                newR = newR << 16;
+                newG = newG << 8;
+                //System.out.println("NewA: " + newA + "NewR: " + newR + "NewG: " + newG + "NewB: " + newB);
+                int result = newA + newR + newG + newB;
+                //System.out.println("Now value is: " + result);
+
+                writer.setArgb(i, j, result);
+            }
+        }
+        redraw();
+    }
+
+    /**
      * Set the zoom level on the canvas (in percent)
      * @param zoom
      */
@@ -454,6 +486,7 @@ public class CanvasManager {
         canvas.setHeight(image.getHeight());
         canvas.setWidth(image.getWidth());
         context.drawImage(image, 0, 0, image.getWidth(), image.getHeight());
+        redrawImage = canvas.snapshot(null, null);
     }
 
     /**

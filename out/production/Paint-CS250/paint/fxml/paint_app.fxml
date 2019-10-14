@@ -23,6 +23,7 @@
                     <MenuItem text="Undo" onAction="#handleUndo" accelerator="Shortcut+Z"/>
                     <MenuItem text="Redo" onAction="#handleRedo" accelerator="Shortcut+Y"/>
                     <MenuItem text="Resize" onAction="#handleResize" accelerator="Shortcut+R"/>
+                    <MenuItem text="Invert" onAction="#handleInvert"/>
                 </Menu>
                 <Menu text="View">
                     <CheckMenuItem fx:id="autoSaverMenuOption" text="Auto-Saver Visible" selected="true" onAction="#handleAutoSaver"/>

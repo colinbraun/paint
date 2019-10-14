@@ -18,3 +18,5 @@
 [2019-10-14T00:14:09.125] Tool switched to null
 [2019-10-14T00:42:55.806] Tool switched to LINE
 [2019-10-14T00:43:10.984] Tool switched to SELECT
+[2019-10-14T10:11:26.538] Tool switched to PENCIL
+[2019-10-14T10:31:20.924] Tool switched to PENCIL
