@@ -33,35 +33,95 @@
             </MenuBar>
             <HBox fx:id="toolBarRow1" GridPane.rowIndex="1" GridPane.columnIndex="0">
                 <VBox>
-                    <ColorPicker fx:id="colorPicker" onAction="#handleColorPicker"/>
-                    <ToggleButton fx:id="toggleColorPicker" text="Dropper" onAction="#handleToggleColorPicker"/>
-                    <ToggleButton fx:id="toggleSelect" text="Select" onAction="#handleToggleSelect"/>
+                    <ColorPicker fx:id="colorPicker" onAction="#handleColorPicker">
+                        <tooltip>
+                            <Tooltip text="Color Picker"/>
+                        </tooltip>
+                    </ColorPicker>
+                    <ToggleButton fx:id="toggleColorPicker" text="Dropper" onAction="#handleToggleColorPicker">
+                        <tooltip>
+                            <Tooltip text="Color Dropper - Set drawing color to a pixel you click on"/>
+                        </tooltip>
+                    </ToggleButton>
+                    <ToggleButton fx:id="toggleSelect" text="Select" onAction="#handleToggleSelect">
+                        <tooltip>
+                            <Tooltip text="Select - Grab and copy/move a section of the canvas"/>
+                        </tooltip>
+                    </ToggleButton>
                 </VBox>
                 <VBox>
-                    <ToggleButton fx:id="togglePencil" text="Pencil" onAction="#handleTogglePencil"/>
-                    <ToggleButton fx:id="toggleDrawLine" text="Line" onAction="#handleToggleDrawLine"/>
-                    <ToggleButton fx:id="toggleEraser" text="Eraser" onAction="#handleToggleEraser"/>
+                    <ToggleButton fx:id="togglePencil" text="Pencil" onAction="#handleTogglePencil">
+                        <tooltip>
+                            <Tooltip text="Pencil - Free draw tool"/>
+                        </tooltip>
+                    </ToggleButton>
+                    <ToggleButton fx:id="toggleDrawLine" text="Line" onAction="#handleToggleDrawLine">
+                        <tooltip>
+                            <Tooltip text="Line - Draw a straight line from one point to another"/>
+                        </tooltip>
+                    </ToggleButton>
+                    <ToggleButton fx:id="toggleEraser" text="Eraser" onAction="#handleToggleEraser">
+                        <tooltip>
+                            <Tooltip text="Eraser - Freely erase by clicking and dragging"/>
+                        </tooltip>
+                    </ToggleButton>
                 </VBox>
                 <VBox>
-                    <ToggleButton fx:id="toggleDrawCircle" text="Circle" onAction="#handleToggleDrawCircle"/>
-                    <ToggleButton fx:id="toggleDrawEllipse" text="Ellipse" onAction="#handleToggleDrawEllipse"/>
-                    <ToggleButton fx:id="toggleText" text="Text" onAction="#handleToggleText"/>
+                    <ToggleButton fx:id="toggleDrawCircle" text="Circle" onAction="#handleToggleDrawCircle">
+                        <tooltip>
+                            <Tooltip text="Circle - Draw a circle, starting from the corner of it"/>
+                        </tooltip>
+                    </ToggleButton>
+                    <ToggleButton fx:id="toggleDrawEllipse" text="Ellipse" onAction="#handleToggleDrawEllipse">
+                        <tooltip>
+                            <Tooltip text="Ellipse - Draw an ellipse, starting from the corner of it"/>
+                        </tooltip>
+                    </ToggleButton>
+                    <ToggleButton fx:id="toggleText" text="Text" onAction="#handleToggleText">
+                        <tooltip>
+                            <Tooltip text="Text - Place text on the canvas. Same text can be placed multiple times"/>
+                        </tooltip>
+                    </ToggleButton>
                 </VBox>
                 <VBox>
-                    <ToggleButton fx:id="toggleDrawSquare" text="Square" onAction="#handleToggleDrawSquare"/>
-                    <ToggleButton fx:id="toggleDrawRectangle" text="Rectangle" onAction="#handleToggleDrawRectangle"/>
-                    <ToggleButton fx:id="togglePolygon" text="Polygon" onAction="#handleTogglePolygon"/>
+                    <ToggleButton fx:id="toggleDrawSquare" text="Square" onAction="#handleToggleDrawSquare">
+                        <tooltip>
+                            <Tooltip text="Square - Draw a square"/>
+                        </tooltip>
+                    </ToggleButton>
+                    <ToggleButton fx:id="toggleDrawRectangle" text="Rectangle" onAction="#handleToggleDrawRectangle">
+                        <tooltip>
+                            <Tooltip text="Rectangle - Draw a rectangle"/>
+                        </tooltip>
+                    </ToggleButton>
+                    <ToggleButton fx:id="togglePolygon" text="Polygon" onAction="#handleTogglePolygon">
+                        <tooltip>
+                            <Tooltip text="Polygon - Draw a regular, n-sided polygon"/>
+                        </tooltip>
+                    </ToggleButton>
                 </VBox>
                 <VBox>
-                    <ToggleButton fx:id="toggleDrawTriangle" text="Triangle" onAction="#handleToggleDrawTriangle"/>
+                    <ToggleButton fx:id="toggleDrawTriangle" text="Triangle" onAction="#handleToggleDrawTriangle">
+                        <tooltip>
+                            <Tooltip text="Triangle - Draw a triangle"/>
+                        </tooltip>
+                    </ToggleButton>
                 </VBox>
                 <VBox alignment="CENTER">
-                    <Slider fx:id="lineWidthSlider" showTickLabels="true" showTickMarks="true" majorTickUnit="2" minorTickCount="1" value="1" min="0" max="10" prefWidth="300"/>
+                    <Slider fx:id="lineWidthSlider" showTickLabels="true" showTickMarks="true" majorTickUnit="2" minorTickCount="1" value="1" min="0" max="10" prefWidth="300">
+                        <tooltip>
+                            <Tooltip text="Slider to control the with of the line (applies to eraser as well)"/>
+                        </tooltip>
+                    </Slider>
                     <Label fx:id="lineWidthLabel" text="Line Width"/>
                 </VBox>
                 <VBox>
                     <Label text="Zoom:"/>
-                    <TextField fx:id="zoomField" text="100" onAction="#handleZoomField"/>
+                    <TextField fx:id="zoomField" text="100" onAction="#handleZoomField">
+                        <tooltip>
+                            <Tooltip text="Set the zoom to a specific % (100% default)"/>
+                        </tooltip>
+                    </TextField>
                 </VBox>
             </HBox>
         </GridPane>

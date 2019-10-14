@@ -22,11 +22,17 @@ import paint.util.CanvasManager;
 import paint.util.ToggleGroup;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.Scanner;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -438,6 +444,28 @@ public class MainController extends BaseController {
         });
         thread.setDaemon(true);
         thread.start();
+
+        Thread toolThread = new Thread(() -> {
+            while(true) {
+                try {
+                    // Don't check too often, as it's not necessary.
+                    Thread.sleep(10);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                if(canvasManager.isToolChanged()) {
+                    try {
+                        String output = "[" + LocalDateTime.now().toString() + "] " + "Tool switched to " + canvasManager.getToolMode() + "\n";
+                        Files.write(Paths.get("log.txt"), output.getBytes(), StandardOpenOption.APPEND);
+                    }catch (IOException e) {
+                        // Do nothing. This should not happen.
+                    }
+                    canvasManager.setToolNotChanged();
+                }
+            }
+        });
+        toolThread.setDaemon(true);
+        toolThread.start();
     }
 
     /**

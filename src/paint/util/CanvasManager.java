@@ -13,6 +13,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
 import javafx.scene.image.WritablePixelFormat;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
@@ -96,6 +97,14 @@ public class CanvasManager {
      * A copy of what the canvas looks like right before a selection is made (for the sake of undoing)
      */
     private Image preSelectImage;
+    /**
+     * Whether or not ctrl-c has been pressed or not
+     */
+    private boolean ctrl_c_pressed;
+    /**
+     * Whether or not the tool has been changed recently. (should be set to false externally using #setToolChanged)
+     */
+    private boolean toolChanged;
 
     public CanvasManager(@NotNull Canvas canvas) {
         undoStack = new Stack<>();
@@ -164,13 +173,16 @@ public class CanvasManager {
                             selection.setMouseY(event.getY());
                             selection.setGrabbedX(event.getX());
                             selection.setGrabbedY(event.getY());
-
-                            PixelWriter pixelWriter = ((WritableImage)redrawImage).getPixelWriter();
-                            for(int i = (int)selection.getXTopLeft(); i < (int)(selection.getXTopLeft()+selection.getWidth()); i++) {
-                                for(int j = (int)selection.getYTopLeft(); j < (int)(selection.getYTopLeft()+selection.getHeight()); j++) {
-                                    pixelWriter.setArgb(i, j, 0xFFFFFFFF);
+                            // If ctrl-c is not pressed, we are cutting (setting background of selected area to white.
+                            if(!ctrl_c_pressed) {
+                                PixelWriter pixelWriter = ((WritableImage) redrawImage).getPixelWriter();
+                                for (int i = (int) selection.getXTopLeft(); i < (int) (selection.getXTopLeft() + selection.getWidth()); i++) {
+                                    for (int j = (int) selection.getYTopLeft(); j < (int) (selection.getYTopLeft() + selection.getHeight()); j++) {
+                                        pixelWriter.setArgb(i, j, 0xFFFFFFFF);
+                                    }
                                 }
                             }
+                            // Whether ctrl-c was pressed or not, redraw.
                             redraw();
                             selection.drawPreview(context);
                         }
@@ -239,6 +251,8 @@ public class CanvasManager {
                         params.setViewport(new Rectangle2D(selection.getXTopLeft(), selection.getYTopLeft(), selection.getWidth(), selection.getHeight()));
                         selection.setSelection(canvas.snapshot(params, null));
                         selection.drawPreview(context);
+                        // In case it was not reset somewhere else.
+                        ctrl_c_pressed = false;
                         return;
                     }
                     else if(selection.isGrabbed()) {
@@ -282,6 +296,7 @@ public class CanvasManager {
      */
     public void setToolMode(ToolMode mode) {
         this.toolMode = mode;
+        toolChanged = true;
     }
 
     public ToolMode getToolMode() {
@@ -323,6 +338,18 @@ public class CanvasManager {
 
     public void setSelectionMade(boolean selectionMade) {
         this.selectionMade = selectionMade;
+    }
+
+    public boolean isToolChanged() {
+        return toolChanged;
+    }
+
+    public void setToolNotChanged() {
+        toolChanged = false;
+    }
+
+    public void setCtrl_c_pressed(boolean ctrl_c_pressed) {
+        this.ctrl_c_pressed = ctrl_c_pressed;
     }
 
     /**

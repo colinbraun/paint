@@ -4,6 +4,8 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import paint.constant.SaveChoice;
 import paint.controller.MainController;
@@ -41,6 +43,11 @@ public class Main extends Application {
         // TODO: Fix so only paint_app.fxml needs to be passed
         Parent root = FXMLLoader.load(getClass().getResource("/paint/fxml/paint_app.fxml"));
         Scene scene = new Scene(root, WIDTH, HEIGHT);
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
+            // Check to see if ctrl-c is pressed
+            if(event.isControlDown() && event.getCode() == KeyCode.C)
+                mainController.getCanvasManager().setCtrl_c_pressed(true);
+        });
         stage.setTitle("Paint - CS250");
         stage.setScene(scene);
         stage.setMinWidth(MIN_WIDTH);

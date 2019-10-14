@@ -1,0 +1,11 @@
+[2019-10-13T21:08:34.787] Tool switched to LINE
+[2019-10-13T21:08:35.550] Tool switched to ELLIPSE
+[2019-10-13T21:08:36.260] Tool switched to CIRCLE
+[2019-10-13T21:08:36.830] Tool switched to null
+[2019-10-13T21:22:19.306] Tool switched to SQUARE
+[2019-10-13T21:33:15.137] Tool switched to LINE
+[2019-10-13T21:43:51.725] Tool switched to RECTANGLE
+[2019-10-13T21:43:55.561] Tool switched to SELECT
+[2019-10-13T21:44:00.462] Tool switched to null
+[2019-10-13T21:44:00.772] Tool switched to SELECT
+[2019-10-13T21:45:24.477] Tool switched to SELECT
