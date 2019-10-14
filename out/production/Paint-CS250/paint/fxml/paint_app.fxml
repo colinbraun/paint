@@ -35,17 +35,17 @@
                 <VBox>
                     <ColorPicker fx:id="colorPicker" onAction="#handleColorPicker">
                         <tooltip>
-                            <Tooltip text="Color Picker"/>
+                            <Tooltip text="Primary Color Picker"/>
+                        </tooltip>
+                    </ColorPicker>
+                    <ColorPicker fx:id="colorPickerSecondary" onAction="#handleColorPickerSecondary">
+                        <tooltip>
+                            <Tooltip text="Secondary Color Picker"/>
                         </tooltip>
                     </ColorPicker>
                     <ToggleButton fx:id="toggleColorPicker" text="Dropper" onAction="#handleToggleColorPicker">
                         <tooltip>
                             <Tooltip text="Color Dropper - Set drawing color to a pixel you click on"/>
-                        </tooltip>
-                    </ToggleButton>
-                    <ToggleButton fx:id="toggleSelect" text="Select" onAction="#handleToggleSelect">
-                        <tooltip>
-                            <Tooltip text="Select - Grab and copy/move a section of the canvas"/>
                         </tooltip>
                     </ToggleButton>
                 </VBox>
@@ -104,6 +104,11 @@
                     <ToggleButton fx:id="toggleDrawTriangle" text="Triangle" onAction="#handleToggleDrawTriangle">
                         <tooltip>
                             <Tooltip text="Triangle - Draw a triangle"/>
+                        </tooltip>
+                    </ToggleButton>
+                    <ToggleButton fx:id="toggleSelect" text="Select" onAction="#handleToggleSelect">
+                        <tooltip>
+                            <Tooltip text="Select - Grab and copy/move a section of the canvas"/>
                         </tooltip>
                     </ToggleButton>
                 </VBox>

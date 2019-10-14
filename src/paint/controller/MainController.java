@@ -22,7 +22,6 @@ import paint.util.CanvasManager;
 import paint.util.ToggleGroup;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
@@ -32,10 +31,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.Scanner;
-import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 /**
  * The Controller for the main window
@@ -68,6 +64,10 @@ public class MainController extends BaseController {
      * The colorPicker used to choose the color to draw with
      */
     @FXML private ColorPicker colorPicker;
+    /**
+     * The colorPicker used to select the secondary color (right click color)
+     */
+    @FXML private ColorPicker colorPickerSecondary;
     /**
      * Toggle buttons to handle tool modes
      */
@@ -178,7 +178,12 @@ public class MainController extends BaseController {
      */
     @FXML
     public void handleColorPicker() {
-        canvasManager.setSelectedColor(colorPicker.getValue());
+        canvasManager.setPrimaryColor(colorPicker.getValue());
+    }
+
+    @FXML
+    public void handleColorPickerSecondary() {
+        canvasManager.setSecondaryColor(colorPickerSecondary.getValue());
     }
 
     /**
@@ -428,7 +433,8 @@ public class MainController extends BaseController {
         fontChooser.getItems().setAll(Font.getFamilies());
         fontChooser.setValue("Comic Sans MS");
 
-        Thread thread = new Thread(() -> {
+        // Create a thread that automatically saves the current image on the canvas every X seconds
+        Thread autoSaveThread = new Thread(() -> {
             while(true) {
                 try {
                     for(int i = 10; i > 0; i--) {
@@ -442,9 +448,10 @@ public class MainController extends BaseController {
                 Platform.runLater(() -> canvasManager.sendSnapShotToNewFile(canvas.snapshot(null, null)));
             }
         });
-        thread.setDaemon(true);
-        thread.start();
+        autoSaveThread.setDaemon(true);
+        autoSaveThread.start();
 
+        // Create a thread that logs when the tool is switched from one to another
         Thread toolThread = new Thread(() -> {
             while(true) {
                 try {

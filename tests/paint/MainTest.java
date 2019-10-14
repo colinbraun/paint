@@ -10,7 +10,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
-import paint.constant.SaveChoice;
 import paint.constant.ToolMode;
 import paint.controller.MainController;
 import paint.util.CanvasManager;
@@ -83,7 +82,7 @@ public class MainTest extends ApplicationTest {
             e.printStackTrace();
         }
         controller.handleColorPicker();
-        assertTrue(controller.getColorPicker().getValue().equals(canvasManager.getSelectedColor()));
+        assertTrue(controller.getColorPicker().getValue().equals(canvasManager.getPrimaryColor()));
     }
 
     @Test

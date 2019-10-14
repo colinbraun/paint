@@ -13,7 +13,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
 import javafx.scene.image.WritablePixelFormat;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
@@ -58,9 +57,13 @@ public class CanvasManager {
      */
      private Drawable currentDrawing;
     /**
-     * The currently selected color
+     * The primary color (left click)
      */
-    private Paint selectedColor;
+    private Paint primaryColor;
+    /**
+     * The secondary color (right click)
+     */
+    private Paint secondaryColor;
     /**
      * Used to facilitate previewing effects before they actually apply to the image.
      */
@@ -110,7 +113,8 @@ public class CanvasManager {
         undoStack = new Stack<>();
         redoStack = new Stack<>();
         this.canvas = canvas;
-        selectedColor = Color.BLACK;
+        primaryColor = Color.BLACK;
+        secondaryColor = Color.WHITE;
         context = canvas.getGraphicsContext2D();
         initEvents();
         redrawImage = canvas.snapshot(null, null);
@@ -125,6 +129,15 @@ public class CanvasManager {
         canvas.addEventHandler(MouseEvent.MOUSE_PRESSED, (event) -> {
             if(toolMode == null)
                 return;
+            if(event.isSecondaryButtonDown()) {
+                context.setFill(secondaryColor);
+                context.setStroke(secondaryColor);
+            }
+            else {
+                context.setFill(primaryColor);
+                context.setStroke(primaryColor);
+            }
+
 
             if(!selectionMade)
                 redrawImage = canvas.snapshot(null, null);
@@ -173,7 +186,7 @@ public class CanvasManager {
                             selection.setMouseY(event.getY());
                             selection.setGrabbedX(event.getX());
                             selection.setGrabbedY(event.getY());
-                            // If ctrl-c is not pressed, we are cutting (setting background of selected area to white.
+                            // If ctrl-c is not pressed, we are cutting (setting background of selected area to white).
                             if(!ctrl_c_pressed) {
                                 PixelWriter pixelWriter = ((WritableImage) redrawImage).getPixelWriter();
                                 for (int i = (int) selection.getXTopLeft(); i < (int) (selection.getXTopLeft() + selection.getWidth()); i++) {
@@ -195,7 +208,7 @@ public class CanvasManager {
                 case COLOR_PICKER:
                     Color color = redrawImage.getPixelReader().getColor((int)event.getX(), (int)event.getY());
                     Main.mainController.getColorPicker().setValue(color);
-                    setSelectedColor(color);
+                    setPrimaryColor(color);
                     break;
                 }
             changeMadeNotSaved = true;
@@ -312,16 +325,22 @@ public class CanvasManager {
     }
     /**
      * Set the color to draw with
-     * @param color the color to draw with
+     * @param color the secondary color to draw with
      */
-    public void setSelectedColor(Paint color) {
-        this.selectedColor = color;
-        context.setFill(color);
-        context.setStroke(color);
+    public void setPrimaryColor(Paint color) {
+        this.primaryColor = color;
     }
 
-    public Paint getSelectedColor() {
-        return selectedColor;
+    /**
+     * Set the secondary color to draw with
+     * @param color the primary color to draw with
+     */
+    public void setSecondaryColor(Paint color) {
+        this.secondaryColor = color;
+    }
+
+    public Paint getPrimaryColor() {
+        return primaryColor;
     }
 
     public void setTextFont(Font font) {
