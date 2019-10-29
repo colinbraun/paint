@@ -106,6 +106,10 @@ public class CanvasManager {
      */
     private boolean toolChanged;
 
+    /**
+     * Default Constructor
+     * @param canvas the {@link Canvas} that this class will manage
+     */
     public CanvasManager(@NotNull Canvas canvas) {
         undoStack = new Stack<>();
         redoStack = new Stack<>();
@@ -289,7 +293,7 @@ public class CanvasManager {
     }
 
     /**
-     * Invert the redrawImage (resulting in the canvas image being inverted)
+     * Invert the image on the canvas
      */
     public void invert() {
         PixelWriter writer = ((WritableImage)redrawImage).getPixelWriter();
@@ -299,13 +303,10 @@ public class CanvasManager {
         for(int i = 0; i < redrawImage.getWidth(); i++) {
             for(int j = 0; j < redrawImage.getHeight(); j++) {
                 int value = reader.getArgb(i, j);
-                //System.out.println("Value was: " + value);
                 int a = (value >> 24) & 0xFF;
                 int r = (value >> 16) & 0xFF;
                 int g = (value >> 8) & 0xFF;
                 int b = value & 0xFF;
-
-                //System.out.println("A: " + a + "R: " + r + "G: " + g + "B: " + b);
                 int newA = a;
                 int newR = 255 - r;
                 int newG = 255 - g;
@@ -313,9 +314,7 @@ public class CanvasManager {
                 newA = newA << 24;
                 newR = newR << 16;
                 newG = newG << 8;
-                //System.out.println("NewA: " + newA + "NewR: " + newR + "NewG: " + newG + "NewB: " + newB);
                 int result = newA + newR + newG + newB;
-                //System.out.println("Now value is: " + result);
 
                 writer.setArgb(i, j, result);
             }
@@ -324,8 +323,8 @@ public class CanvasManager {
     }
 
     /**
-     * Set the zoom level on the canvas (in percent)
-     * @param zoom
+     * Set the zoom level on the canvas
+     * @param zoom the zooming level in percent
      */
     public void setZoom(int zoom) {
         Parent parent = canvas.getParent();
@@ -344,6 +343,10 @@ public class CanvasManager {
         toolChanged = true;
     }
 
+    /**
+     * Get the currently selected {@link ToolMode}
+     * @return the selected tool mode
+     */
     public ToolMode getToolMode() {
         return toolMode;
     }
@@ -375,14 +378,26 @@ public class CanvasManager {
         return primaryColor;
     }
 
+    /**
+     * Set the font that will be drawn with
+     * @param font the font
+     */
     public void setTextFont(Font font) {
         context.setFont(font);
     }
 
+    /**
+     * Set the text that will be drawn
+     * @param text the text to be drawn
+     */
     public void setDrawText(String text) {
         drawText = text;
     }
 
+    /**
+     * Set the number of sides when drawing a generic polygon
+     * @param sides the number of sides of the polygon
+     */
     public void setPolygonSides(int sides) {
         polygonSides = sides;
     }
@@ -399,6 +414,12 @@ public class CanvasManager {
         toolChanged = false;
     }
 
+    /**
+     * Set whether or not ctrl-c is pressed or not. This is only called in {@link Main}.
+     * It should NOT be called anywhere else.
+     * This does not need to be set to false, it will be done automatically.
+     * @param ctrl_c_pressed whether or not ctrl-c is pressed
+     */
     public void setCtrl_c_pressed(boolean ctrl_c_pressed) {
         this.ctrl_c_pressed = ctrl_c_pressed;
     }
@@ -530,7 +551,7 @@ public class CanvasManager {
     /**
      * Display the save window and wait.
      * Note that when YES is selected, SAVING IS HANDLED BY THE SAVE POPUP CONTROLLER
-     * @return The SaveChoice that was made.
+     * @return The {@link SaveChoice} that was made.
      */
     public SaveChoice showSavePopup() {
 
