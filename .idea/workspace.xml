@@ -3,11 +3,29 @@
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/log.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Paint-CS250/paint/util/CanvasManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Paint-CS250/paint/util/CanvasManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/paint/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/paint/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/paint/controller/AboutController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/paint/controller/AboutController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/paint/controller/BaseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/paint/controller/BaseController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/paint/controller/LossyFilePopupController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/paint/controller/LossyFilePopupController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/paint/controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/paint/controller/MainController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/paint/controller/ResizeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/paint/controller/ResizeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/paint/controller/SavePopupController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/paint/controller/SavePopupController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/paint/controller/release_notes.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/paint/controller/release_notes.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/paint/css/background.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/paint/draw/Circle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/paint/draw/Circle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/paint/draw/Drawable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/paint/draw/Drawable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/paint/draw/Ellipse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/paint/draw/Ellipse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/paint/draw/Eraser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/paint/draw/Eraser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/paint/draw/FreeDraw.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/paint/draw/FreeDraw.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/paint/draw/Line.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/paint/draw/Line.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/paint/draw/Polygon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/paint/draw/Polygon.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/paint/draw/Rectangle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/paint/draw/Rectangle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/paint/draw/Selection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/paint/draw/Selection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/paint/draw/Square.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/paint/draw/Square.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/paint/draw/Text.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/paint/draw/Text.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/paint/draw/Triangle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/paint/draw/Triangle.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/paint/util/CanvasManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/paint/util/CanvasManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.png" beforeDir="false" afterPath="$PROJECT_DIR$/test.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/paint/util/ToggleGroup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/paint/util/ToggleGroup.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

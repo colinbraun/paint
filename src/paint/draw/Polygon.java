@@ -4,6 +4,7 @@ import javafx.scene.canvas.GraphicsContext;
 
 /**
  * A generic regular polygon with N sides
+ * @author Colin Braun
  */
 public class Polygon extends Drawable {
 

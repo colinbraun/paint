@@ -1,5 +1,5 @@
 
-Panit v1.5 - Release Notes:
+Paint v1.5 - Release Notes:
 * Implemented image inverter
 * Added Copy pasting of selections
 * Added a log of when/what tools are used

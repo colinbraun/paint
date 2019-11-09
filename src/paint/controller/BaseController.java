@@ -7,6 +7,10 @@ import paint.util.CanvasManager;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * The base controller class for all fxml controllers.
+ * @author Colin Braun
+ */
 public class BaseController implements Initializable {
 
     /**

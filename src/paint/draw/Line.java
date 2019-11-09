@@ -4,9 +4,17 @@ import javafx.scene.canvas.GraphicsContext;
 
 /**
  * A class to represent a line
+ * @author Colin Braun
  */
 public class Line extends Drawable {
 
+    /**
+     *
+     * @param startX the starting x value of the line
+     * @param startY the starting y value of the line
+     * @param endX the ending x value of the line
+     * @param endY the ending y value of the line
+     */
     public Line(double startX, double startY, double endX, double endY) {
         super(startX, startY, endX, endY);
     }
@@ -20,6 +28,10 @@ public class Line extends Drawable {
         this(x, y, x, y);
     }
 
+    /**
+     * Draw the line
+     * @param context the context used to draw
+     */
     @Override
     public void drawFinal(GraphicsContext context) {
         context.strokeLine(x0, y0, x1, y1);

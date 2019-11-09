@@ -12,8 +12,15 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
+/**
+ * A class to control the About Window
+ * @author Colin Braun
+ */
 public class AboutController extends BaseController {
 
+    /**
+     * The content of this controller. Will contain text elements.
+     */
     @FXML private VBox content;
 
     @Override

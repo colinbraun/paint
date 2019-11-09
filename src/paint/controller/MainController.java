@@ -83,6 +83,9 @@ public class MainController extends BaseController {
     @FXML private ToggleButton togglePolygon;
     @FXML private ToggleButton toggleSelect;
     @FXML private ToggleButton toggleDrawTriangle;
+    /**
+     * The {@link ToggleGroup} to manage the tools
+     */
     private ToggleGroup tools;
     @FXML private HBox toolBarRow1;
     /**
@@ -102,11 +105,19 @@ public class MainController extends BaseController {
     @FXML private CheckMenuItem autoSaverMenuOption;
 
     private ScheduledExecutorService autoSaver;
+
+    /**
+     * Construct the controller. This is normally called automatically by the fxml file using this as its controller.
+     */
     public MainController() {
         tools = new ToggleGroup();
         Main.mainController = this;
     }
 
+    /**
+     * Return the canvas manager associated with this controller
+     * @return the {@link CanvasManager}
+     */
     public CanvasManager getCanvasManager() {
         return canvasManager;
     }
@@ -181,6 +192,9 @@ public class MainController extends BaseController {
         canvasManager.setPrimaryColor(colorPicker.getValue());
     }
 
+    /**
+     * Runs when something happens to the secondary color picker
+     */
     @FXML
     public void handleColorPickerSecondary() {
         canvasManager.setSecondaryColor(colorPickerSecondary.getValue());
@@ -305,6 +319,9 @@ public class MainController extends BaseController {
             canvasManager.setToolMode(null);
     }
 
+    /**
+     * Runs when the polygon button is clicked
+     */
     @FXML
     public void handleTogglePolygon() {
         tools.unToggleAllBut(togglePolygon);
@@ -328,6 +345,9 @@ public class MainController extends BaseController {
             canvasManager.setToolMode(null);
     }
 
+    /**
+     * Runs when the select button is clicked
+     */
     @FXML
     public void handleToggleSelect() {
         tools.unToggleAllBut(toggleSelect);
@@ -339,6 +359,9 @@ public class MainController extends BaseController {
             canvasManager.setToolMode(null);
     }
 
+    /**
+     * Runs when the triangle button is clicked
+     */
     @FXML
     public void handleToggleDrawTriangle() {
         tools.unToggleAllBut(toggleDrawTriangle);
@@ -394,6 +417,9 @@ public class MainController extends BaseController {
         canvasManager.setZoom(Integer.parseInt(zoomField.textProperty().getValue()));
     }
 
+    /**
+     * Runs when the autoSaver menu option is changed (to make it visible or not visible)
+     */
     @FXML
     public void handleAutoSaver() {
         if(autoSaverMenuOption.isSelected()) {
@@ -403,12 +429,20 @@ public class MainController extends BaseController {
             autoSaveTimer.setVisible(false);
     }
 
+    /**
+     * Runs when Edit -> Invert is clicked
+     */
     @FXML
     public void handleInvert() {
         canvasManager.invert();
     }
 
-    // This will run AFTER all the component fields have been initialized, unlike the constructor
+    /**
+     * Initialize/setup this controller. This is called by the fxml that is using this controller.
+     * It should not be called explicitly
+     * @param location fxml location parameter
+     * @param resources fxml resources parameter
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         lineWidthSlider.valueProperty().addListener((event) -> canvasManager.setLineWidth(lineWidthSlider.getValue()));

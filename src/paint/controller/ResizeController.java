@@ -14,6 +14,10 @@ import paint.util.CanvasManager;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * The controller for the popup that appears when Edit -> Resize is clicked
+ * @author Colin Braun
+ */
 public class ResizeController extends BaseController {
 
     /**
@@ -57,6 +61,11 @@ public class ResizeController extends BaseController {
         ((Stage)horizontalField.getScene().getWindow()).close();
     }
 
+    /**
+     * Attempts to get the value in the {@link TextField} as an integer
+     * @param field the field whose value will be retrieved
+     * @return the value of the {@link TextField}, or -1 if it doesn't exist
+     */
     private int getTextFieldValue(TextField field) {
         try {
             return Integer.parseInt(field.textProperty().getValue());

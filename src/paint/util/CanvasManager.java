@@ -374,6 +374,10 @@ public class CanvasManager {
         this.secondaryColor = color;
     }
 
+    /**
+     * Get the primary color (left mouse button color) that is selected
+     * @return
+     */
     public Paint getPrimaryColor() {
         return primaryColor;
     }
@@ -402,14 +406,25 @@ public class CanvasManager {
         polygonSides = sides;
     }
 
+    /**
+     * Set whether or not a selection has been made or not (should be internal use only)
+     * @param selectionMade whether or not a selection is made
+     */
     public void setSelectionMade(boolean selectionMade) {
         this.selectionMade = selectionMade;
     }
 
+    /**
+     * Get whether or not the selected tool has changed
+     * @return whether or not the selected tool has changed
+     */
     public boolean isToolChanged() {
         return toolChanged;
     }
 
+    /**
+     * Set the currently selected tool to not have been changed. Internal use only
+     */
     public void setToolNotChanged() {
         toolChanged = false;
     }

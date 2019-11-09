@@ -5,6 +5,10 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 
+/**
+ * A drawable selection
+ * @author Colin Braun
+ */
 public class Selection extends Drawable {
 
     /**
@@ -20,6 +24,11 @@ public class Selection extends Drawable {
      */
     private double grabbedDeltaX, grabbedDeltaY, mouseX, mouseY;
 
+    /**
+     * Set a selection at x0, y0
+     * @param x0 the starting x value of the selection
+     * @param y0 the starting y value of the selection
+     */
     public Selection(double x0, double y0) {
         super(x0, y0, x0, y0);
         isGrabbed = false;
@@ -99,18 +108,34 @@ public class Selection extends Drawable {
         isGrabbed = grabbed;
     }
 
+    /**
+     * Set where this selection is grabbed horizontally
+     * @param grabbedX the x value
+     */
     public void setGrabbedX(double grabbedX) {
         this.grabbedDeltaX = getXTopLeft() - grabbedX;
     }
 
+    /**
+     * Set where this selection is grabbed vertically
+     * @param grabbedY the y value
+     */
     public void setGrabbedY(double grabbedY) {
         this.grabbedDeltaY = getYTopLeft() - grabbedY;
     }
 
+    /**
+     * Set the x value of where the mouse currently is
+     * @param mouseX the x value of the mouse's position
+     */
     public void setMouseX(double mouseX) {
         this.mouseX = mouseX;
     }
 
+    /**
+     * Set the y value of where the mouse currently is
+     * @param mouseY the y value of the mouse's position
+     */
     public void setMouseY(double mouseY) {
         this.mouseY = mouseY;
     }

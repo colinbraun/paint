@@ -10,6 +10,10 @@ import javafx.stage.Stage;
 import paint.constant.SaveChoice;
 import paint.controller.MainController;
 
+/**
+ * The main class where this application starts
+ * @author Colin Braun
+ */
 public class Main extends Application {
 
     /**
@@ -38,6 +42,11 @@ public class Main extends Application {
         launch(args);
     }
 
+    /**
+     * Called at startup automatically
+     * @param stage the passed primary stage
+     * @throws Exception comes with the method signature
+     */
     @Override
     public void start(Stage stage) throws Exception {
         // TODO: Fix so only paint_app.fxml needs to be passed

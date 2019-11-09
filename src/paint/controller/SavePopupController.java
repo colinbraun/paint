@@ -8,6 +8,10 @@ import paint.constant.SaveChoice;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Controller for the save popup
+ * @author Colin Braun
+ */
 public class SavePopupController extends BaseController {
 
     /**

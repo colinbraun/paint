@@ -33,3 +33,4 @@
 [2019-10-14T11:48:53.631] Tool switched to null
 [2019-10-14T11:48:53.862] Tool switched to SELECT
 [2019-10-29T02:40:21.226] Tool switched to SELECT
+[2019-11-08T21:57:45.422] Tool switched to PENCIL
