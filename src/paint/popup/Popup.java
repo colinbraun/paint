@@ -39,7 +39,7 @@ public abstract class Popup<T> extends Stage {
 
     /**
      * Construct a popup without using an fxml file. Requires the root to be initialized by the parent
-     * @param title
+     * @param title the title of the popup
      */
     public Popup(String title) {
         this.setTitle(title);

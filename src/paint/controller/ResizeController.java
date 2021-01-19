@@ -15,7 +15,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- * The controller for the popup that appears when Edit -> Resize is clicked
+ * The controller for the popup that appears when Edit ... Resize is clicked
  * @author Colin Braun
  */
 public class ResizeController extends BaseController {

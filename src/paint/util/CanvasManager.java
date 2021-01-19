@@ -376,7 +376,7 @@ public class CanvasManager {
 
     /**
      * Get the primary color (left mouse button color) that is selected
-     * @return
+     * @return the {@link Paint} object of the currently selected primary color
      */
     public Paint getPrimaryColor() {
         return primaryColor;

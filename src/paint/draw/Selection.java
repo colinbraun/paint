@@ -94,7 +94,7 @@ public class Selection extends Drawable {
 
     /**
      * Whether or not the selection is grabbed
-     * @return
+     * @return whether or not the selection is grabbed
      */
     public boolean isGrabbed() {
         return isGrabbed;

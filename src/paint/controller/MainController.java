@@ -123,7 +123,7 @@ public class MainController extends BaseController {
     }
 
     /**
-     * Runs when File -> Open is clicked
+     * Runs when File...Open is clicked
      */
     @FXML
     public void handleOpen() {
@@ -134,7 +134,7 @@ public class MainController extends BaseController {
     }
 
     /**
-     * Runs when File -> Save is clicked
+     * Runs when File ... Save is clicked
      */
     @FXML
     public void handleSave() {
@@ -146,7 +146,7 @@ public class MainController extends BaseController {
     }
 
     /**
-     * Runs when File -> Save is clicked
+     * Runs when File ... Save is clicked
      */
     @FXML
     public void handleSaveAs() {
@@ -157,7 +157,7 @@ public class MainController extends BaseController {
     }
 
     /**
-     * Runs when File -> Exit is clicked
+     * Runs when File ... Exit is clicked
      */
     @FXML
     public void handleExit() {
@@ -166,7 +166,7 @@ public class MainController extends BaseController {
     }
 
     /**
-     * Runs when Help -> About is clicked
+     * Runs when Help ... About is clicked
      */
     @FXML
     public void handleAbout() {
@@ -373,7 +373,7 @@ public class MainController extends BaseController {
     }
 
     /**
-     * Runs when Edit -> Resize is clicked
+     * Runs when Edit ... Resize is clicked
      * Note that all the button handling in the resize window happens in {@link ResizeController}
      */
     @FXML
@@ -394,7 +394,7 @@ public class MainController extends BaseController {
     }
 
     /**
-     * Runs when Edit -> Undo is clicked
+     * Runs when Edit ... Undo is clicked
      */
     @FXML
     public void handleUndo() {
@@ -402,7 +402,7 @@ public class MainController extends BaseController {
     }
 
     /**
-     * Runs when Edit -> Redo is clicked
+     * Runs when Edit ... Redo is clicked
      */
     @FXML
     public void handleRedo() {
@@ -430,7 +430,7 @@ public class MainController extends BaseController {
     }
 
     /**
-     * Runs when Edit -> Invert is clicked
+     * Runs when Edit ... Invert is clicked
      */
     @FXML
     public void handleInvert() {
